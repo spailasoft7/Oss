@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSIZWENI Announcements</title>
+<style>
+body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(180deg,#0a0a0a,#111);color:white;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding-bottom:70px;}
+.header{text-align:center;margin-top:20px;}
+.logo{width:100px;height:100px;border-radius:50%;margin-bottom:10px;box-shadow:0 0 20px rgba(255,215,0,0.3);}
+h1{margin:0;font-size:26px;color:#ffd700;}
+.subtitle{font-size:14px;color:#aaa;}
+.coming-soon{margin-top:10px;font-size:13px;padding:6px 14px;border-radius:20px;background:rgba(255,215,0,0.1);color:#ffd700;animation:pulse 2s infinite;}
+.controls{width:90%;max-width:500px;margin:20px 0;}
+select{width:100%;padding:12px;border-radius:12px;background:#1a1a1a;color:#ffd700;border:1px solid #333;}
+.news-container{width:90%;max-width:500px;}
+.announcement-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);padding:18px;margin-bottom:15px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);animation:fadeUp 0.5s ease;}
+.announcement-card:hover{transform:translateY(-4px);}
+.announcement-title{font-size:18px;color:#ffd700;margin-bottom:6px;}
+.announcement-grade{font-size:11px;background:#800000;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px;}
+.announcement-date{font-size:11px;color:#888;margin-top:8px;}
+.read-more{color:#ffd700;cursor:pointer;font-weight:bold;font-size:12px;}
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:#111;display:flex;justify-content:space-around;padding:10px 0;box-shadow:0 -3px 10px rgba(0,0,0,0.5);z-index:999;border-top:1px solid #444;}
+.bottom-nav button{background:none;border:none;color:#ffd700;font-size:16px;display:flex;flex-direction:column;align-items:center;cursor:pointer;}
+.bottom-nav button span{font-size:12px;margin-top:2px;}
+.bottom-nav button.active{color:#fff;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%{opacity:0.6;}50%{opacity:1;}100%{opacity:0.6;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <img src="faviconl.png" class="logo">
+  <h1>OSIZWENI Secondary</h1>
+  <p class="subtitle">Announcements</p>
+  <div class="coming-soon">🚀 Upgrade coming soon</div>
+</div>
+
+<div class="controls">
+  <select id="filter">
+    <option value="All">All Grades</option>
+    <option value="8">Grade 8</option>
+    <option value="9">Grade 9</option>
+    <option value="10">Grade 10</option>
+    <option value="11">Grade 11</option>
+    <option value="12">Grade 12</option>
+  </select>
+</div>
+
+<div id="news" class="news-container"></div>
+
+<div class="bottom-nav">
+  <button onclick="window.location.href='index.html'" class="active">🏠<span>Home</span></button>
+  <button onclick="window.location.href='features.html'">✨<span>Features</span></button>
+  <button onclick="window.location.href='more.html'">💡<span>More</span></button>
+  <button onclick="window.location.href='status.html'">⚡<span>Status</span></button>
+</div>
+<!-- Add this modal container right above the closing </body> -->
+<div id="readMoreModal" style="display:none;position:fixed;z-index:999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.5);">
+  <div style="background:#111;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:20px;text-align:center;position:relative;">
+    <span id="closeReadMore" style="position:absolute;top:10px;right:15px;cursor:pointer;font-weight:bold;color:#ffd700;font-size:20px;">&times;</span>
+    <h2 id="readMoreTitle" style="color:#ffd700;margin-bottom:10px;"></h2>
+    <div id="readMoreMessage" style="color:#fff;text-align:left;"></div>
+  </div>
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig={apiKey:"AIzaSyAa5E1EbFA7ljnoX5WmKpLcUXeNhFzYD54",authDomain:"schoolannouncements-5f68b.firebaseapp.com",databaseURL:"https://schoolannouncements-5f68b-default-rtdb.firebaseio.com",projectId:"schoolannouncements-5f68b"};
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app);
+const newsDiv=document.getElementById("news");
+const filter=document.getElementById("filter");
+
+function loadFromLocal(){const stored=localStorage.getItem("announcements_backup");if(!stored)return[];try{return JSON.parse(stored);}catch{return[];}}
+function saveToLocal(data){localStorage.setItem("announcements_backup",JSON.stringify(data));}
+
+function renderAnnouncements(list){
+  const selected=filter.value;
+  newsDiv.innerHTML="";
+  list.forEach((a,index)=>{
+    if(selected==="All"||a.grade==="All"||a.grade===selected){
+      const card=document.createElement("div");
+      card.className="announcement-card";
+      const title=document.createElement("div");title.className="announcement-title";title.textContent=a.title;
+      const grade=document.createElement("div");grade.className="announcement-grade";grade.textContent=a.grade;
+      const message=document.createElement("div");
+      let shortMsg=a.message.length>120?a.message.substring(0,120)+"...":a.message;
+      message.textContent=shortMsg;
+      if(a.message.length > 120){
+  const readMore = document.createElement("span");
+  readMore.className = "read-more";
+  readMore.textContent = " Read more";
+  
+  readMore.onclick = () => {
+    document.getElementById("readMoreTitle").textContent = a.title;
+    document.getElementById("readMoreMessage").textContent = a.message;
+    document.getElementById("readMoreModal").style.display = "block";
+  };
+
+  message.appendChild(readMore);
+}
+
+const readMoreModal = document.getElementById("readMoreModal");
+const closeReadMore = document.getElementById("closeReadMore");
+
+closeReadMore.onclick = () => readMoreModal.style.display = "none";
+window.onclick = (e) => { 
+  if(e.target == readMoreModal) readMoreModal.style.display = "none"; 
+};
+      const date=document.createElement("div");date.className="announcement-date";date.textContent=new Date(a.date).toLocaleString();
+      card.append(title,grade,message,date);
+      newsDiv.appendChild(card);
+    }
+  });
+}
+
+function loadAnnouncements(){
+  const localData=loadFromLocal();
+  if(localData.length>0) renderAnnouncements(localData);
+  onValue(ref(db,"announcements"),snapshot=>{
+    const data=snapshot.val();
+    if(!data){newsDiv.innerHTML="No announcements yet.";return;}
+    const list=Object.values(data).sort((a,b)=>b.date-a.date);
+    saveToLocal(list);
+    renderAnnouncements(list);
+  });
+}
+
+filter.addEventListener("change",()=>{renderAnnouncements(loadFromLocal());});
+loadAnnouncements();
+</script>
+ <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker failed', err));
+      });
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
