@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">OSS</string>
+    <string name="title_activity_main">OSS</string>
+    <string name="package_name">com.spaila.oss</string>
+    <string name="custom_url_scheme">com.spaila.oss</string>
+</resources>
