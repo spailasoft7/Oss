@@ -1,4 +1,4 @@
-name: Build mr7
+name: Build APK
 
 on:
   push:
@@ -9,12 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # IMPORTANT: use newer checkout version behavior
+      - name: Checkout
+        uses: actions/checkout@v5
 
-      # Force stable Node (IMPORTANT)
+      # Force modern Node runtime
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
 
@@ -24,9 +25,9 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
-      # Force stable Java version (important for Gradle)
+      # Java setup (also update major version usage)
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
