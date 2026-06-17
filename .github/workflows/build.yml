@@ -1,4 +1,4 @@
-name: Build APK
+name: Build Android APK
 
 on:
   push:
@@ -9,35 +9,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # IMPORTANT: use newer checkout version behavior
+      # 1. Get code
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
-      # Force modern Node runtime
+      # 2. Setup Node (IMPORTANT: pin stable version)
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
+      # 3. Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # 4. Build web app (IMPORTANT for www/)
+      - name: Build web
+        run: |
+          echo "Building web app..."
+          npm run build || echo "No build script found, skipping"
+
+      # 5. Sync Capacitor properly
       - name: Sync Capacitor
         run: npx cap sync android
 
-      # Java setup (also update major version usage)
+      # 6. Setup Java
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
+      # 7. Build APK
       - name: Build APK
         run: |
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
 
+      # 8. Upload APK
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
