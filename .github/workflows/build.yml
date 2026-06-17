@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -19,13 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Capacitor Web App
-        run: echo "No build step yet (basic HTML)"
-
-      - name: Install Capacitor Android
-        run: npm install @capacitor/android
-
-      - name: Sync Capacitor
+      - name: Build Capacitor
         run: npx cap sync android
 
       - name: Setup Java
