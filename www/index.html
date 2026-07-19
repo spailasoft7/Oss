@@ -4,28 +4,278 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSIZWENI Announcements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <style>
-body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(180deg,#0a0a0a,#111);color:white;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding-bottom:70px;}
-.header{text-align:center;margin-top:20px;}
-.logo{width:100px;height:100px;border-radius:50%;margin-bottom:10px;box-shadow:0 0 20px rgba(255,215,0,0.3);}
-h1{margin:0;font-size:26px;color:#ffd700;}
-.subtitle{font-size:14px;color:#aaa;}
-.coming-soon{margin-top:10px;font-size:13px;padding:6px 14px;border-radius:20px;background:rgba(255,215,0,0.1);color:#ffd700;animation:pulse 2s infinite;}
-.controls{width:90%;max-width:500px;margin:20px 0;}
-select{width:100%;padding:12px;border-radius:12px;background:#1a1a1a;color:#ffd700;border:1px solid #333;}
-.news-container{width:90%;max-width:500px;}
-.announcement-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);padding:18px;margin-bottom:15px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);animation:fadeUp 0.5s ease;}
-.announcement-card:hover{transform:translateY(-4px);}
-.announcement-title{font-size:18px;color:#ffd700;margin-bottom:6px;}
-.announcement-grade{font-size:11px;background:#800000;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px;}
-.announcement-date{font-size:11px;color:#888;margin-top:8px;}
-.read-more{color:#ffd700;cursor:pointer;font-weight:bold;font-size:12px;}
-.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:#111;display:flex;justify-content:space-around;padding:10px 0;box-shadow:0 -3px 10px rgba(0,0,0,0.5);z-index:999;border-top:1px solid #444;}
-.bottom-nav button{background:none;border:none;color:#ffd700;font-size:16px;display:flex;flex-direction:column;align-items:center;cursor:pointer;}
-.bottom-nav button span{font-size:12px;margin-top:2px;}
-.bottom-nav button.active{color:#fff;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
-@keyframes pulse{0%{opacity:0.6;}50%{opacity:1;}100%{opacity:0.6;}}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:
+radial-gradient(circle at top,#232323,#111 45%,#050505);
+color:#fff;
+min-height:100vh;
+padding-bottom:100px;
+overflow-x:hidden;
+}
+
+.header{
+padding:40px 20px 20px;
+text-align:center;
+}
+
+.logo{
+width:110px;
+height:110px;
+border-radius:50%;
+border:3px solid #FFD700;
+box-shadow:
+0 0 25px rgba(255,215,0,.35);
+}
+
+h1{
+margin-top:15px;
+font-size:30px;
+color:#FFD700;
+font-weight:700;
+}
+
+.subtitle{
+margin-top:5px;
+color:#bdbdbd;
+font-size:15px;
+}
+
+.coming-soon{
+display:inline-flex;
+align-items:center;
+gap:8px;
+margin-top:18px;
+padding:10px 18px;
+background:rgba(255,215,0,.12);
+border:1px solid rgba(255,215,0,.3);
+border-radius:30px;
+color:#FFD700;
+font-size:14px;
+animation:pulse 2s infinite;
+}
+
+.controls{
+width:92%;
+max-width:520px;
+margin:25px auto;
+}
+
+select{
+width:100%;
+padding:15px;
+border:none;
+outline:none;
+border-radius:16px;
+background:#1d1d1d;
+color:#FFD700;
+font-size:15px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.news-container{
+width:92%;
+max-width:520px;
+margin:auto;
+}
+
+.announcement-card{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+padding:20px;
+margin-bottom:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.35);
+transition:.35s;
+animation:fadeUp .4s ease;
+}
+
+.announcement-card:hover{
+transform:translateY(-6px);
+border-color:#FFD700;
+box-shadow:0 0 25px rgba(255,215,0,.25);
+}
+
+.announcement-title{
+font-size:20px;
+font-weight:600;
+color:#FFD700;
+margin-bottom:10px;
+}
+
+.announcement-grade{
+display:inline-block;
+padding:6px 14px;
+background:linear-gradient(90deg,#FFD700,#ffb300);
+color:#111;
+font-size:12px;
+font-weight:600;
+border-radius:30px;
+margin-bottom:14px;
+}
+
+.announcement-date{
+margin-top:14px;
+font-size:12px;
+color:#888;
+}
+
+#readMoreModal{
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(8px);
+z-index:999;
+animation:fadeIn .25s;
+}
+
+#readMoreModal>div{
+background:#141414;
+width:92%;
+max-width:500px;
+max-height:80vh;
+margin:50px auto;
+border-radius:22px;
+padding:25px;
+display:flex;
+flex-direction:column;
+border:1px solid rgba(255,215,0,.25);
+box-shadow:0 0 30px rgba(255,215,0,.2);
+}
+
+#readMoreMessage{
+margin-top:15px;
+color:#ddd;
+line-height:1.8;
+overflow-y:auto;
+max-height:55vh;
+padding-right:8px;
+scroll-behavior:smooth;
+}
+
+#readMoreMessage::-webkit-scrollbar{
+width:6px;
+}
+
+#readMoreMessage::-webkit-scrollbar-thumb{
+background:#FFD700;
+border-radius:20px;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+}
+to{
+opacity:1;
+}
+}
+
+.bottom-nav{
+position:fixed;
+left:15px;
+right:15px;
+bottom:15px;
+height:72px;
+border-radius:22px;
+background:rgba(20,20,20,.95);
+backdrop-filter:blur(20px);
+display:flex;
+justify-content:space-around;
+align-items:center;
+border:1px solid rgba(255,255,255,.08);
+box-shadow:0 10px 35px rgba(0,0,0,.5);
+}
+
+.bottom-nav button{
+background:none;
+border:none;
+color:#999;
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:22px;
+cursor:pointer;
+transition:.3s;
+}
+
+.bottom-nav button span{
+font-size:12px;
+margin-top:4px;
+}
+
+.bottom-nav button.active{
+color:#FFD700;
+}
+
+.bottom-nav button:hover{
+color:white;
+transform:translateY(-4px);
+}
+
+#readMoreModal{
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+backdrop-filter:blur(8px);
+z-index:999;
+}
+
+#readMoreModal>div{
+background:#151515;
+width:92%;
+max-width:450px;
+margin:90px auto;
+padding:25px;
+border-radius:25px;
+border:1px solid rgba(255,215,0,.25);
+box-shadow:0 0 30px rgba(255,215,0,.2);
+}
+
+#closeReadMore{
+color:#FFD700;
+font-size:24px;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes pulse{
+0%{opacity:.6;}
+50%{opacity:1;}
+100%{opacity:.6;}
+}
 </style>
 </head>
 <body>
@@ -34,27 +284,47 @@ select{width:100%;padding:12px;border-radius:12px;background:#1a1a1a;color:#ffd7
   <img src="faviconl.png" class="logo">
   <h1>OSIZWENI Secondary</h1>
   <p class="subtitle">Announcements</p>
-  <div class="coming-soon">🚀 Upgrade coming soon</div>
+  <div class="coming-soon">
+<i class="fa-solid fa-rocket"></i>
+<span>Upgrade Coming Soon</span>
+</div>
 </div>
 
 <div class="controls">
   <select id="filter">
-    <option value="All">All Grades</option>
-    <option value="8">Grade 8</option>
-    <option value="9">Grade 9</option>
-    <option value="10">Grade 10</option>
-    <option value="11">Grade 11</option>
-    <option value="12">Grade 12</option>
-  </select>
+<option value="All">🎓 All Grades</option>
+<option value="8">Grade 8</option>
+<option value="9">Grade 9</option>
+<option value="10">Grade 10</option>
+<option value="11">Grade 11</option>
+<option value="12">Grade 12</option>
+</select>
 </div>
 
 <div id="news" class="news-container"></div>
 
 <div class="bottom-nav">
-  <button onclick="window.location.href='index.html'" class="active">🏠<span>Home</span></button>
-  <button onclick="window.location.href='features.html'">✨<span>Features</span></button>
-  <button onclick="window.location.href='more.html'">💡<span>More</span></button>
-  <button onclick="window.location.href='status.html'">⚡<span>Status</span></button>
+
+<button onclick="location.href='index.html'" class="active">
+<i class="fa-solid fa-house"></i>
+<span>Home</span>
+</button>
+
+<button onclick="location.href='features.html'">
+<i class="fa-solid fa-star"></i>
+<span>Features</span>
+</button>
+
+<button onclick="location.href='more.html'">
+<i class="fa-solid fa-lightbulb"></i>
+<span>More</span>
+</button>
+
+<button onclick="location.href='status.html'">
+<i class="fa-solid fa-chart-line"></i>
+<span>Status</span>
+</button>
+
 </div>
 <!-- Add this modal container right above the closing </body> -->
 <div id="readMoreModal" style="display:none;position:fixed;z-index:999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.5);">
@@ -86,22 +356,13 @@ function renderAnnouncements(list){
       card.className="announcement-card";
       const title=document.createElement("div");title.className="announcement-title";title.textContent=a.title;
       const grade=document.createElement("div");grade.className="announcement-grade";grade.textContent=a.grade;
-      const message=document.createElement("div");
-      let shortMsg=a.message.length>120?a.message.substring(0,120)+"...":a.message;
-      message.textContent=shortMsg;
-      if(a.message.length > 120){
-  const readMore = document.createElement("span");
-  readMore.className = "read-more";
-  readMore.textContent = " Read more";
-  
-  readMore.onclick = () => {
+      title.style.cursor = "pointer";
+
+title.onclick = () => {
     document.getElementById("readMoreTitle").textContent = a.title;
     document.getElementById("readMoreMessage").textContent = a.message;
     document.getElementById("readMoreModal").style.display = "block";
-  };
-
-  message.appendChild(readMore);
-}
+};
 
 const readMoreModal = document.getElementById("readMoreModal");
 const closeReadMore = document.getElementById("closeReadMore");
@@ -111,7 +372,7 @@ window.onclick = (e) => {
   if(e.target == readMoreModal) readMoreModal.style.display = "none"; 
 };
       const date=document.createElement("div");date.className="announcement-date";date.textContent=new Date(a.date).toLocaleString();
-      card.append(title,grade,message,date);
+      card.append(title,grade,date);
       newsDiv.appendChild(card);
     }
   });
@@ -132,15 +393,7 @@ function loadAnnouncements(){
 filter.addEventListener("change",()=>{renderAnnouncements(loadFromLocal());});
 loadAnnouncements();
 </script>
- <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log('Service Worker registered', reg))
-          .catch(err => console.log('Service Worker failed', err));
-      });
-    }
-  </script>
+ 
   <script src="app.js"></script>
 </body>
 </html>
