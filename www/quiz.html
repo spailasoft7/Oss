@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0B1B3A">
+<title>OSIZWENI Quiz Zone</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0B1B3A;
+  --navy-card:#132852;
+  --navy-line:#24406e;
+  --maroon:#8C1D2B;
+  --maroon-deep:#5E121C;
+  --yellow:#FFC93C;
+  --yellow-deep:#E8AC1D;
+  --cream:#FDF3E2;
+  --muted:#93A3C4;
+  --green:#54B77A;
+  --red:#D65B62;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  min-height:100vh;
+  padding:0 0 36px;
+  font-family:'Poppins',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(circle at 12% 0%,#142c58 0%,transparent 44%),
+    radial-gradient(circle at 92% 14%,#14213f 0%,transparent 40%),
+    var(--navy);
+}
+
+button{font:inherit}
+
+body.modal-open{overflow:hidden}
+
+.app{
+  width:88%;
+  max-width:480px;
+  margin:0 auto;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 0 10px;
+}
+
+.back-btn{
+  border:2px solid var(--navy-line);
+  background:var(--navy-card);
+  color:var(--cream);
+  border-radius:15px;
+  padding:8px 12px;
+  font-family:'Fredoka',sans-serif;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 3px 0 rgba(0,0,0,.25);
+}
+
+.back-btn:active{transform:translateY(2px)}
+
+.brand{
+  text-align:right;
+}
+
+.brand-title{
+  margin:0;
+  font:700 19px 'Fredoka',sans-serif;
+}
+
+.brand-title span{color:var(--yellow)}
+
+.brand-sub{
+  margin:1px 0 0;
+  color:var(--muted);
+  font-size:10px;
+}
+
+/* WELCOME */
+.welcome{
+  background:
+    linear-gradient(120deg,var(--maroon),var(--maroon-deep));
+  border:2px dashed var(--yellow);
+  border-radius:22px;
+  padding:18px;
+  margin:8px 0 14px;
+  box-shadow:0 9px 0 -4px rgba(0,0,0,.3),0 14px 22px rgba(0,0,0,.28);
+  position:relative;
+  overflow:hidden;
+}
+
+.welcome:after{
+  content:"✦";
+  position:absolute;
+  right:17px;
+  top:9px;
+  color:var(--yellow);
+  font-size:27px;
+  transform:rotate(12deg);
+}
+
+.welcome h1{
+  margin:0 35px 3px 0;
+  font:700 23px 'Fredoka',sans-serif;
+}
+
+.welcome p{
+  margin:0;
+  font-size:12px;
+  line-height:1.5;
+  opacity:.9;
+}
+
+/* BRAIN PROGRESS */
+.progress-card{
+  background:var(--navy-card);
+  border:1.5px dashed var(--navy-line);
+  border-radius:18px;
+  padding:14px 15px;
+  margin-bottom:17px;
+  box-shadow:0 8px 0 -4px rgba(0,0,0,.25),0 10px 18px rgba(0,0,0,.22);
+}
+
+.progress-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.progress-label{
+  font:600 13px 'Fredoka',sans-serif;
+}
+
+.level{
+  background:var(--yellow);
+  color:var(--navy);
+  padding:4px 10px;
+  border-radius:13px;
+  font:700 11px 'Fredoka',sans-serif;
+  box-shadow:0 2px 0 var(--yellow-deep);
+}
+
+.progress-track{
+  height:12px;
+  background:var(--navy);
+  border:1px solid var(--navy-line);
+  border-radius:20px;
+  margin-top:10px;
+  padding:2px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  width:0%;
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--maroon),var(--yellow));
+  transition:width .55s cubic-bezier(.22,1.3,.4,1);
+}
+
+.progress-note{
+  margin:7px 0 0;
+  color:var(--muted);
+  font-size:10.5px;
+}
+
+/* SCREENS */
+.screen{display:none}
+.screen.active{display:block}
+
+/* CATEGORY */
+.section-title{
+  margin:0 0 10px;
+  font:700 16px 'Fredoka',sans-serif;
+  color:var(--yellow);
+}
+
+.category-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+}
+
+.category{
+  min-height:98px;
+  border:1.5px solid var(--navy-line);
+  border-radius:18px;
+  background:var(--navy-card);
+  color:var(--cream);
+  padding:14px;
+  text-align:left;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 7px 0 -3px rgba(0,0,0,.3),0 9px 16px rgba(0,0,0,.2);
+  transition:transform .16s ease,border-color .16s ease;
+}
+
+.category:hover{
+  transform:translateY(-2px) rotate(-.5deg);
+  border-color:var(--yellow);
+}
+
+.category:active{transform:translateY(2px)}
+
+.category-icon{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:var(--maroon);
+  color:var(--yellow);
+  font-size:20px;
+  margin-bottom:9px;
+}
+
+.category:nth-child(2) .category-icon{background:#4E6FB0}
+.category:nth-child(3) .category-icon{background:var(--yellow);color:var(--navy)}
+.category:nth-child(4) .category-icon{background:var(--maroon-deep)}
+.category:nth-child(5) .category-icon{background:#4E6FB0}
+.category:nth-child(6) .category-icon{background:var(--yellow);color:var(--navy)}
+
+.category-name{
+  display:block;
+  font:600 14px 'Fredoka',sans-serif;
+}
+
+.category-count{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:2px;
+}
+
+/* QUIZ HEADER */
+.quiz-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.quiz-category{
+  color:var(--yellow);
+  font:600 12px 'Fredoka',sans-serif;
+}
+
+.timer{
+  min-width:66px;
+  text-align:center;
+  background:var(--yellow);
+  color:var(--navy);
+  border-radius:14px;
+  padding:7px 10px;
+  font:700 13px 'Fredoka',sans-serif;
+  box-shadow:0 3px 0 var(--yellow-deep);
+}
+
+.timer.warning{
+  background:var(--maroon);
+  color:var(--cream);
+  box-shadow:0 3px 0 var(--maroon-deep);
+}
+
+.question-progress{
+  height:8px;
+  background:var(--navy-card);
+  border:1px solid var(--navy-line);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:15px;
+}
+
+.question-progress-fill{
+  width:0;
+  height:100%;
+  background:var(--yellow);
+  transition:width .3s ease;
+}
+
+.question-card{
+  background:var(--navy-card);
+  border:1.5px dashed var(--navy-line);
+  border-radius:20px;
+  padding:19px 17px;
+  box-shadow:0 10px 0 -4px rgba(0,0,0,.28),0 13px 22px rgba(0,0,0,.25);
+  animation:cardIn .35s ease both;
+}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(10px) scale(.98)}
+  to{opacity:1;transform:none}
+}
+
+.question-number{
+  display:inline-block;
+  background:var(--maroon);
+  color:var(--cream);
+  padding:5px 10px;
+  border-radius:13px;
+  font:600 10px 'Fredoka',sans-serif;
+  margin-bottom:10px;
+}
+
+.question{
+  margin:0 0 18px;
+  font:600 19px/1.35 'Fredoka',sans-serif;
+}
+
+.answers{
+  display:grid;
+  gap:10px;
+}
+
+.answer{
+  width:100%;
+  text-align:left;
+  border:2px solid var(--navy-line);
+  border-radius:15px;
+  background:#10244a;
+  color:var(--cream);
+  padding:12px 13px;
+  cursor:pointer;
+  font-size:12.5px;
+  line-height:1.35;
+  transition:transform .15s ease,border-color .15s ease,background .15s ease;
+}
+
+.answer:hover{
+  border-color:var(--yellow);
+  transform:translateX(2px);
+}
+
+.answer:disabled{cursor:default}
+
+.answer.correct{
+  background:rgba(84,183,122,.18);
+  border-color:var(--green);
+}
+
+.answer.wrong{
+  background:rgba(214,91,98,.18);
+  border-color:var(--red);
+}
+
+.answer-letter{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:25px;
+  height:25px;
+  border-radius:9px;
+  background:var(--navy-card);
+  color:var(--yellow);
+  font:700 11px 'Fredoka',sans-serif;
+  margin-right:8px;
+  vertical-align:middle;
+}
+
+.answer.correct .answer-letter{
+  background:var(--green);
+  color:white;
+}
+
+.answer.wrong .answer-letter{
+  background:var(--red);
+  color:white;
+}
+
+.feedback{
+  min-height:20px;
+  margin:12px 2px 0;
+  font:600 12px 'Fredoka',sans-serif;
+  color:var(--yellow);
+}
+
+.quiz-actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:13px;
+}
+
+.primary-btn{
+  border:0;
+  border-radius:15px;
+  background:var(--yellow);
+  color:var(--navy);
+  padding:10px 17px;
+  font:700 13px 'Fredoka',sans-serif;
+  cursor:pointer;
+  box-shadow:0 4px 0 var(--yellow-deep);
+}
+
+.primary-btn:active{
+  transform:translateY(2px);
+  box-shadow:0 2px 0 var(--yellow-deep);
+}
+
+.primary-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.secondary-btn{
+  border:2px solid var(--navy-line);
+  border-radius:15px;
+  background:transparent;
+  color:var(--cream);
+  padding:9px 15px;
+  font:600 12px 'Fredoka',sans-serif;
+  cursor:pointer;
+}
+
+/* RESULTS */
+.result-card{
+  background:var(--navy-card);
+  border:2px dashed var(--yellow);
+  border-radius:23px;
+  padding:23px 18px;
+  text-align:center;
+  box-shadow:0 10px 0 -4px rgba(0,0,0,.28),0 14px 24px rgba(0,0,0,.3);
+  animation:cardIn .45s ease both;
+}
+
+.result-badge{
+  width:68px;
+  height:68px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--yellow);
+  color:var(--navy);
+  font-size:31px;
+  box-shadow:0 5px 0 var(--yellow-deep);
+}
+
+.result-card h2{
+  margin:0 0 6px;
+  font:700 24px 'Fredoka',sans-serif;
+  color:var(--yellow);
+}
+
+.result-card p{
+  margin:0 auto;
+  max-width:330px;
+  font-size:12.5px;
+  line-height:1.55;
+  color:var(--cream);
+  opacity:.92;
+}
+
+.score{
+  margin:17px auto;
+  width:135px;
+  padding:10px;
+  border-radius:17px;
+  background:var(--maroon);
+}
+
+.score strong{
+  display:block;
+  font:700 27px 'Fredoka',sans-serif;
+  color:var(--yellow);
+}
+
+.score span{
+  font-size:10px;
+  color:var(--cream);
+}
+
+.result-stats{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  margin-bottom:17px;
+}
+
+.stat{
+  min-width:82px;
+  background:#10244a;
+  border:1px solid var(--navy-line);
+  border-radius:13px;
+  padding:8px;
+}
+
+.stat strong{
+  display:block;
+  font:700 15px 'Fredoka',sans-serif;
+  color:var(--yellow);
+}
+
+.stat span{
+  color:var(--muted);
+  font-size:9px;
+}
+
+.result-buttons{
+  display:flex;
+  gap:9px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.leave-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,12,28,.76);backdrop-filter:blur(4px);opacity:0;visibility:hidden;pointer-events:none;transition:.2s ease}
+.leave-overlay.open{opacity:1;visibility:visible;pointer-events:auto}
+.leave-modal{width:100%;max-width:360px;background:var(--navy-card);border:2px dashed var(--yellow);border-radius:23px;padding:22px 19px 19px;text-align:center;box-shadow:0 12px 0 -5px rgba(0,0,0,.3),0 20px 42px rgba(0,0,0,.45);transform:translateY(12px) scale(.96);transition:transform .25s cubic-bezier(.22,1.3,.4,1)}
+.leave-overlay.open .leave-modal{transform:none}
+.leave-icon{width:52px;height:52px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:var(--maroon);color:var(--yellow);font:700 25px 'Fredoka',sans-serif;box-shadow:0 4px 0 var(--maroon-deep)}
+.leave-modal h2{margin:0 0 7px;color:var(--yellow);font:700 21px 'Fredoka',sans-serif}
+.leave-modal p{margin:0 auto;max-width:300px;color:var(--cream);opacity:.88;font-size:12px;line-height:1.55}
+.leave-actions{display:flex;gap:9px;justify-content:center;margin-top:18px}
+.leave-actions button{min-width:105px}
+/* TOAST */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  transform:translate(-50%,20px);
+  width:max-content;
+  max-width:88%;
+  background:var(--yellow);
+  color:var(--navy);
+  padding:10px 14px;
+  border-radius:14px;
+  font:600 11px 'Fredoka',sans-serif;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s ease;
+  z-index:50;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+.hidden{display:none!important}
+
+@media(max-width:360px){
+  .category-grid{grid-template-columns:1fr}
+  .question{font-size:17px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <header class="header">
+    <button class="back-btn" id="backBtn">← Back</button>
+
+    <div class="brand">
+      <h2 class="brand-title">OSIZWENI <span>Quiz</span></h2>
+      <p class="brand-sub">Learn • Play • Keep going</p>
+    </div>
+  </header>
+
+  <section class="welcome">
+    <h1 id="welcomeTitle">Hey there! 👋</h1>
+    <p>Ready for a quick challenge? Pick a subject and show what you know.</p>
+  </section>
+
+  <section class="progress-card">
+    <div class="progress-top">
+      <span class="progress-label">🧠 Brain Progress</span>
+      <span class="level" id="levelBadge">Level 1</span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <p class="progress-note" id="progressNote">Your quiz journey starts here.</p>
+  </section>
+
+  <!-- HOME -->
+  <main id="homeScreen" class="screen active">
+    <h3 class="section-title">Choose your quiz</h3>
+
+    <div class="category-grid">
+      <button class="category" data-category="Mathematics">
+        <span class="category-icon">∑</span>
+        <span class="category-name">Mathematics</span>
+        <span class="category-count">10 questions</span>
+      </button>
+
+      <button class="category" data-category="Physical Science">
+        <span class="category-icon">⚛</span>
+        <span class="category-name">Physical Science</span>
+        <span class="category-count">10 questions</span>
+      </button>
+
+      <button class="category" data-category="Life Sciences">
+        <span class="category-icon">✚</span>
+        <span class="category-name">Life Sciences</span>
+        <span class="category-count">10 questions</span>
+      </button>
+
+      <button class="category" data-category="Geography">
+        <span class="category-icon">◎</span>
+        <span class="category-name">Geography</span>
+        <span class="category-count">10 questions</span>
+      </button>
+
+      <button class="category" data-category="History">
+        <span class="category-icon">⌛</span>
+        <span class="category-name">History</span>
+        <span class="category-count">10 questions</span>
+      </button>
+
+      <button class="category" data-category="Mixed Challenge">
+        <span class="category-icon">★</span>
+        <span class="category-name">Mixed Challenge</span>
+        <span class="category-count">10 questions</span>
+      </button>
+      
+      <button class="category" id="mysteryQuiz">
+  <span class="category-icon">?</span>
+  <span class="category-name">Mystery Quiz</span>
+  <span class="category-count">Something random 👀</span>
+</button>
+    </div>
+  </main>
+
+  <!-- QUIZ -->
+  <main id="quizScreen" class="screen">
+    <div class="quiz-meta">
+      <span class="quiz-category" id="quizCategory">Mathematics</span>
+      <span class="timer" id="timer">30s</span>
+    </div>
+
+    <div class="question-progress">
+      <div class="question-progress-fill" id="questionProgress"></div>
+    </div>
+
+    <div class="question-card" id="questionCard">
+      <span class="question-number" id="questionNumber">Question 1 / 10</span>
+      <h2 class="question" id="questionText"></h2>
+
+      <div class="answers" id="answers"></div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="quiz-actions">
+        <button class="primary-btn" id="nextBtn" disabled>Next →</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- RESULTS -->
+  <main id="resultScreen" class="screen">
+    <div class="result-card">
+      <div class="result-badge" id="resultBadge">🎉</div>
+
+      <h2 id="resultTitle">You did it!</h2>
+
+      <p id="resultMessage"></p>
+
+      <div class="score">
+        <strong id="scoreText">8 / 10</strong>
+        <span>quiz score</span>
+      </div>
+
+      <div class="result-stats">
+        <div class="stat">
+          <strong id="correctStat">8</strong>
+          <span>Correct</span>
+        </div>
+
+        <div class="stat">
+          <strong id="wrongStat">2</strong>
+          <span>Missed</span>
+        </div>
+
+        <div class="stat">
+          <strong id="timeStat">0:00</strong>
+          <span>Time</span>
+        </div>
+      </div>
+
+      <div class="result-buttons">
+        <button class="primary-btn" id="anotherBtn">Try Another Quiz</button>
+        <button class="secondary-btn" id="homeBtn">Back to Home</button>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<div class="leave-overlay" id="leaveModal" aria-hidden="true"><div class="leave-modal" role="dialog" aria-modal="true" aria-labelledby="leaveTitle"><div class="leave-icon">←</div><h2 id="leaveTitle">Leave this quiz?</h2><p>Your current quiz will not be saved. You can come back and start a fresh challenge anytime.</p><div class="leave-actions"><button class="secondary-btn" id="stayBtn">Stay</button><button class="primary-btn" id="leaveQuizBtn">Leave Quiz</button></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*
+  ============================================================
+  OSIZWENI QUIZ ZONE
+  ------------------------------------------------------------
+  Everything below is LOCAL ONLY.
+
+  No Firebase.
+  No XP.
+  No account system.
+  Quiz progress is stored in localStorage.
+  ============================================================
+*/
+
+/* =========================
+   QUIZ BANK
+   ========================= */
+
+const quizBank = {
+
+  "Mathematics": [
+    {q:"What is 15 × 4?",o:["45","50","60","75"],a:2},
+    {q:"What is 144 ÷ 12?",o:["10","12","14","16"],a:1},
+    {q:"If x + 7 = 19, what is x?",o:["10","11","12","13"],a:2},
+    {q:"What is the area of a rectangle 8 cm long and 5 cm wide?",o:["13 cm²","26 cm²","40 cm²","80 cm²"],a:2},
+    {q:"What is 3² + 4²?",o:["12","20","25","49"],a:2},
+    {q:"What is 25% of 80?",o:["10","15","20","25"],a:2},
+    {q:"Which number is a prime number?",o:["21","27","29","33"],a:2},
+    {q:"Simplify: 2x + 3x",o:["5","5x","6x","x⁵"],a:1},
+    {q:"What is the perimeter of a square with sides of 6 cm?",o:["12 cm","18 cm","24 cm","36 cm"],a:2},
+    {q:"What is the next number: 3, 6, 12, 24, ...?",o:["30","36","42","48"],a:3}
+  ],
+
+  "Physical Science": [
+    {q:"What is the SI unit of force?",o:["Joule","Newton","Watt","Pascal"],a:1},
+    {q:"Which particle has a negative charge?",o:["Proton","Neutron","Electron","Nucleus"],a:2},
+    {q:"What is the formula for speed?",o:["time ÷ distance","distance ÷ time","mass × acceleration","force ÷ mass"],a:1},
+    {q:"Which form of energy is stored in a stretched spring?",o:["Kinetic","Elastic potential","Nuclear","Sound"],a:1},
+    {q:"What is the approximate acceleration due to gravity on Earth?",o:["1.8 m/s²","5.0 m/s²","9.8 m/s²","20 m/s²"],a:2},
+    {q:"Which subatomic particle has no electric charge?",o:["Electron","Proton","Neutron","Ion"],a:2},
+    {q:"A substance with a pH below 7 is generally...",o:["Acidic","Neutral","Basic","Metallic"],a:0},
+    {q:"What happens to resistance in a conductor when its length increases, all else equal?",o:["It generally increases","It becomes zero","It always halves","It never changes"],a:0},
+    {q:"Which gas is needed for ordinary combustion?",o:["Nitrogen","Oxygen","Helium","Hydrogen"],a:1},
+    {q:"What is the chemical symbol for sodium?",o:["S","So","Na","Sd"],a:2}
+  ],
+
+  "Life Sciences": [
+    {q:"What is the basic unit of life?",o:["Tissue","Organ","Cell","System"],a:2},
+    {q:"Which organ pumps blood around the human body?",o:["Liver","Heart","Lung","Kidney"],a:1},
+    {q:"What gas do plants take in during photosynthesis?",o:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],a:2},
+    {q:"Where is genetic information mainly stored in a eukaryotic cell?",o:["Cell wall","Nucleus","Vacuole","Ribosome"],a:1},
+    {q:"Which system is mainly responsible for transporting blood?",o:["Digestive system","Circulatory system","Skeletal system","Nervous system"],a:1},
+    {q:"What is the process by which green plants make glucose using light energy?",o:["Respiration","Digestion","Photosynthesis","Excretion"],a:2},
+    {q:"Which blood cells help defend the body against pathogens?",o:["Red blood cells","White blood cells","Platelets","Plasma cells only"],a:1},
+    {q:"Which structure controls what enters and leaves a cell?",o:["Cell membrane","Nucleus","Chromosome","Cytoplasm"],a:0},
+    {q:"What is a group of similar cells working together called?",o:["Organism","Tissue","Organ system","Species"],a:1},
+    {q:"Which molecule carries hereditary information?",o:["DNA","Glucose","Water","Starch"],a:0}
+  ],
+
+  "Geography": [
+    {q:"What is the largest continent?",o:["Africa","Asia","Europe","North America"],a:1},
+    {q:"What is the capital city of South Africa's administrative branch?",o:["Cape Town","Pretoria","Durban","Bloemfontein"],a:1},
+    {q:"Which imaginary line divides Earth into the Northern and Southern Hemispheres?",o:["Prime Meridian","Equator","Tropic of Capricorn","Arctic Circle"],a:1},
+    {q:"What instrument is commonly used to measure atmospheric pressure?",o:["Thermometer","Barometer","Rain gauge","Anemometer"],a:1},
+    {q:"What is the process where water changes from liquid to gas?",o:["Condensation","Freezing","Evaporation","Precipitation"],a:2},
+    {q:"Which ocean is the largest?",o:["Atlantic","Indian","Pacific","Arctic"],a:2},
+    {q:"What do we call molten rock beneath Earth's surface?",o:["Lava","Magma","Ash","Sediment"],a:1},
+    {q:"Which layer of the atmosphere contains most weather?",o:["Troposphere","Stratosphere","Mesosphere","Thermosphere"],a:0},
+    {q:"A map scale is mainly used to show...",o:["Population only","Distance relationship","Temperature only","Political opinions"],a:1},
+    {q:"Which natural process wears away and transports soil or rock?",o:["Erosion","Rotation","Condensation","Photosynthesis"],a:0}
+  ],
+
+  "History": [
+    {q:"In which country did the Industrial Revolution begin?",o:["France","Britain","Brazil","Japan"],a:1},
+    {q:"Which ancient civilisation built the pyramids at Giza?",o:["Romans","Ancient Egyptians","Vikings","Maya"],a:1},
+    {q:"What does the term 'democracy' broadly refer to?",o:["Rule by the people","Rule by one person","Rule by soldiers only","Rule by merchants only"],a:0},
+    {q:"Which organisation was established in 1945 to promote international cooperation?",o:["United Nations","European Union","African Union","NATO"],a:0},
+    {q:"Who was Nelson Mandela?",o:["A South African anti-apartheid leader and president","A British monarch","A scientist","A Roman emperor"],a:0},
+    {q:"The ancient Roman city of Pompeii was buried after the eruption of which volcano?",o:["Etna","Vesuvius","Kilimanjaro","Fuji"],a:1},
+    {q:"Which invention greatly increased the speed of long-distance written communication in the 19th century?",o:["Telegraph","Compass","Plough","Sundial"],a:0},
+    {q:"What is an archive?",o:["A collection of preserved records","A type of weapon","A weather event","A farming machine"],a:0},
+    {q:"What is chronology?",o:["Study of rocks","Arrangement of events in time order","Study of maps","Measurement of rainfall"],a:1},
+    {q:"Why do historians use primary sources?",o:["They provide evidence from the period being studied","They are always perfectly accurate","They replace all other evidence","They are only modern opinions"],a:0}
+  ]
+
+};
+
+/* Mixed questions are created from the other subjects. */
+quizBank["Mixed Challenge"] = [
+  quizBank["Mathematics"][0],
+  quizBank["Physical Science"][1],
+  quizBank["Life Sciences"][0],
+  quizBank["Geography"][0],
+  quizBank["History"][2],
+  quizBank["Mathematics"][5],
+  quizBank["Physical Science"][0],
+  quizBank["Life Sciences"][2],
+  quizBank["Geography"][7],
+  quizBank["History"][4]
+];
+
+document.getElementById("mysteryQuiz").addEventListener("click", async () => {
+
+  showToast("🕵️ Finding your mystery quiz...");
+
+  try {
+
+    const response = await fetch(
+      "https://opentdb.com/api.php?amount=10&type=multiple"
+    );
+
+    if (!response.ok) {
+      throw new Error("API request failed");
+    }
+
+    const data = await response.json();
+
+    if (data.response_code !== 0 || !data.results.length) {
+      throw new Error("No questions available");
+    }
+
+    const mysteryQuestions = data.results.map(item => {
+
+      const decode = text => {
+        const parser = new DOMParser();
+        return parser.parseFromString(
+          text,
+          "text/html"
+        ).documentElement.textContent;
+      };
+
+      const correct = decode(item.correct_answer);
+
+      const answers = [
+        correct,
+        ...item.incorrect_answers.map(decode)
+      ];
+
+      const shuffled = shuffle(answers);
+
+      return {
+        q: decode(item.question),
+        o: shuffled,
+        a: shuffled.indexOf(correct)
+      };
+
+    });
+
+    currentCategory = "🕵️ Mystery Quiz";
+    currentQuiz = mysteryQuestions;
+
+    currentQuestion = 0;
+    score = 0;
+    answered = false;
+    quizElapsedSeconds = 0;
+    quizStartedAt = Date.now();
+
+    document.getElementById("quizCategory").textContent =
+      "🕵️ Mystery Quiz";
+
+    showScreen(quizScreen);
+
+    renderQuestion();
+
+  } catch(error) {
+
+    console.error(error);
+
+    showToast(
+      "Couldn't find a mystery quiz. Check your internet connection."
+    );
+
+  }
+
+});
+
+/* =========================
+   LOCAL STORAGE
+   ========================= */
+
+const STORAGE_KEY = "osizweni_quiz_progress_v1";
+
+function getProgress(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(saved && typeof saved === "object") return saved;
+  }catch(e){}
+  return {
+    completed:0,
+    level:1,
+    levelProgress:0,
+    seen:{}
+  };
+}
+
+function saveProgress(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(progress));
+}
+
+let progress = getProgress();
+
+/* =========================
+   USER NAME
+   ========================= */
+
+function getUserName(){
+  const possibleKeys = [
+    "userName",
+    "username",
+    "name",
+    "studentName",
+    "profileName"
+  ];
+
+  for(const key of possibleKeys){
+    const value = localStorage.getItem(key);
+    if(value && value.trim()){
+      return value.trim();
+    }
+  }
+
+  return "Quiz Champion";
+}
+
+const userName = getUserName();
+
+document.getElementById("welcomeTitle").textContent =
+  "Hey, " + userName + "! 👋";
+
+/* =========================
+   SCREEN CONTROL
+   ========================= */
+
+const homeScreen = document.getElementById("homeScreen");
+const quizScreen = document.getElementById("quizScreen");
+const resultScreen = document.getElementById("resultScreen");
+
+function showScreen(screen){
+  [homeScreen,quizScreen,resultScreen].forEach(s =>
+    s.classList.remove("active")
+  );
+  screen.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* =========================
+   BRAIN PROGRESS
+   ========================= */
+
+function updateProgressUI(){
+
+  const completed = progress.completed || 0;
+
+  /*
+    Every completed quiz adds 10% to the current level.
+    10 quizzes = next level.
+    This is deliberately only a local motivational system.
+  */
+  const withinLevel = completed % 10;
+  const percent = withinLevel === 0 && completed > 0
+    ? 100
+    : withinLevel * 10;
+
+  const level = Math.floor(completed / 10) + 1;
+
+  progress.level = level;
+  progress.levelProgress = percent;
+
+  document.getElementById("levelBadge").textContent =
+    "Level " + level;
+
+  document.getElementById("progressFill").style.width =
+    percent + "%";
+
+  if(completed === 0){
+    document.getElementById("progressNote").textContent =
+      "Your quiz journey starts here.";
+  }else if(percent === 100){
+    document.getElementById("progressNote").textContent =
+      "Level complete! Your next challenge is waiting. 🚀";
+  }else{
+    const left = 10 - withinLevel;
+    document.getElementById("progressNote").textContent =
+      left + " more quiz" + (left === 1 ? "" : "zes") +
+      " until the next level.";
+  }
+
+  saveProgress();
+}
+
+updateProgressUI();
+
+/* =========================
+   QUIZ STATE
+   ========================= */
+
+let currentCategory = "";
+let currentQuiz = [];
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let timerSeconds = 30;
+let timerInterval = null;
+let quizStartedAt = 0;
+let quizElapsedSeconds = 0;
+
+/* =========================
+   RANDOMIZATION
+   ========================= */
+
+function shuffle(array){
+  const copy = [...array];
+
+  for(let i=copy.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]] = [copy[j],copy[i]];
+  }
+
+  return copy;
+}
+
+/*
+  The questions are shuffled and remembered locally.
+  Once every question in a subject has been used, its local
+  seen list resets so the subject can continue generating quizzes.
+*/
+function makeQuiz(category){
+
+  const bank = quizBank[category] || [];
+
+  if(!bank.length) return [];
+
+  const seenKey = category;
+
+  let seen = Array.isArray(progress.seen[seenKey])
+    ? progress.seen[seenKey]
+    : [];
+
+  let available = bank
+    .map((q,i)=>({q,index:i}))
+    .filter(item=>!seen.includes(item.index));
+
+  if(available.length < Math.min(10,bank.length)){
+    seen = [];
+    available = bank.map((q,i)=>({q,index:i}));
+  }
+
+  const picked = shuffle(available).slice(0,Math.min(10,bank.length));
+
+  progress.seen[seenKey] = [
+    ...seen,
+    ...picked.map(item=>item.index)
+  ];
+
+  saveProgress();
+
+  /*
+    Shuffle the answer order too, while preserving the correct answer.
+  */
+  return picked.map(item=>{
+    const original = item.q;
+    const options = original.o.map((text,index)=>({
+      text,
+      correct:index === original.a
+    }));
+
+    const shuffledOptions = shuffle(options);
+
+    return {
+      q:original.q,
+      o:shuffledOptions.map(x=>x.text),
+      a:shuffledOptions.findIndex(x=>x.correct)
+    };
+  });
+}
+
+/* =========================
+   START QUIZ
+   ========================= */
+
+document.querySelectorAll(".category").forEach(button=>{
+  button.addEventListener("click",()=>{
+    startQuiz(button.dataset.category);
+  });
+});
+
+function startQuiz(category){
+
+  currentCategory = category;
+  currentQuiz = makeQuiz(category);
+
+  if(!currentQuiz.length){
+    showToast("No questions available yet.");
+    return;
+  }
+
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  quizElapsedSeconds = 0;
+  quizStartedAt = Date.now();
+
+  document.getElementById("quizCategory").textContent =
+    category;
+
+  showScreen(quizScreen);
+  renderQuestion();
+}
+
+/* =========================
+   TIMER
+   ========================= */
+
+function startTimer(){
+
+  clearInterval(timerInterval);
+
+  timerSeconds = 30;
+  updateTimer();
+
+  timerInterval = setInterval(()=>{
+    timerSeconds--;
+    updateTimer();
+
+    if(timerSeconds <= 0){
+      clearInterval(timerInterval);
+
+      if(!answered){
+        revealAnswer(-1);
+      }
+    }
+  },1000);
+}
+
+function updateTimer(){
+
+  const timer = document.getElementById("timer");
+
+  timer.textContent = timerSeconds + "s";
+
+  timer.classList.toggle(
+    "warning",
+    timerSeconds <= 8
+  );
+}
+
+/* =========================
+   RENDER QUESTION
+   ========================= */
+
+function renderQuestion(){
+
+  answered = false;
+
+  const q = currentQuiz[currentQuestion];
+  const total = currentQuiz.length;
+
+  document.getElementById("questionNumber").textContent =
+    "Question " + (currentQuestion+1) + " / " + total;
+
+  document.getElementById("questionText").textContent =
+    q.q;
+
+  document.getElementById("feedback").textContent = "";
+
+  const nextBtn = document.getElementById("nextBtn");
+  nextBtn.disabled = true;
+  nextBtn.textContent =
+    currentQuestion === total-1
+      ? "Finish ✓"
+      : "Next →";
+
+  const progressPercent =
+    ((currentQuestion) / total) * 100;
+
+  document.getElementById("questionProgress").style.width =
+    progressPercent + "%";
+
+  const answers = document.getElementById("answers");
+  answers.innerHTML = "";
+
+  const letters = ["A","B","C","D"];
+
+  q.o.forEach((option,index)=>{
+
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.dataset.index = index;
+
+    button.innerHTML =
+      '<span class="answer-letter">' +
+      letters[index] +
+      '</span>' +
+      escapeHtml(option);
+
+    button.addEventListener("click",()=>{
+      revealAnswer(index);
+    });
+
+    answers.appendChild(button);
+  });
+
+  const card = document.getElementById("questionCard");
+  card.style.animation = "none";
+  void card.offsetWidth;
+  card.style.animation = "cardIn .35s ease both";
+
+  startTimer();
+}
+
+/* =========================
+   ANSWER
+   ========================= */
+
+function revealAnswer(selected){
+
+  if(answered) return;
+
+  answered = true;
+  clearInterval(timerInterval);
+
+  const q = currentQuiz[currentQuestion];
+  const answerButtons =
+    document.querySelectorAll(".answer");
+
+  answerButtons.forEach(button=>{
+    button.disabled = true;
+
+    const index = Number(button.dataset.index);
+
+    if(index === q.a){
+      button.classList.add("correct");
+    }
+
+    if(index === selected && index !== q.a){
+      button.classList.add("wrong");
+    }
+  });
+
+  const feedback = document.getElementById("feedback");
+
+  if(selected === q.a){
+    score++;
+    feedback.textContent = "✓ Nice one! You got it!";
+  }else if(selected === -1){
+    feedback.textContent =
+      "⏰ Time's up! The correct answer is highlighted.";
+  }else{
+    feedback.textContent =
+      "Not quite — keep going. You've got this!";
+  }
+
+  document.getElementById("nextBtn").disabled = false;
+}
+
+/* =========================
+   NEXT
+   ========================= */
+
+document.getElementById("nextBtn").addEventListener("click",()=>{
+
+  if(!answered) return;
+
+  if(currentQuestion < currentQuiz.length-1){
+    currentQuestion++;
+    renderQuestion();
+  }else{
+    finishQuiz();
+  }
+});
+
+/* =========================
+   FINISH
+   ========================= */
+
+function finishQuiz(){
+
+  clearInterval(timerInterval);
+
+  quizElapsedSeconds =
+    Math.max(1,Math.round((Date.now()-quizStartedAt)/1000));
+
+  progress.completed++;
+  saveProgress();
+  updateProgressUI();
+
+  const total = currentQuiz.length;
+  const percentage = Math.round((score/total)*100);
+
+  document.getElementById("scoreText").textContent =
+    score + " / " + total;
+
+  document.getElementById("correctStat").textContent =
+    score;
+
+  document.getElementById("wrongStat").textContent =
+    total-score;
+
+  document.getElementById("timeStat").textContent =
+    formatTime(quizElapsedSeconds);
+
+  let title = "";
+  let message = "";
+  let badge = "🎉";
+
+  if(percentage >= 90){
+    title = "Brilliant work, " + userName + "!";
+    message =
+      "Wow! You really brought your A-game. Keep that momentum going — another challenge is waiting for you!";
+    badge = "🌟";
+  }else if(percentage >= 70){
+    title = "Great job, " + userName + "!";
+    message =
+      "You're getting sharper! Keep practising and you'll be ready to ace the next one.";
+    badge = "🚀";
+  }else if(percentage >= 50){
+    title = "Nice effort, " + userName + "!";
+    message =
+      "You made it through! Every quiz is another chance to learn something new. Give the next one a go!";
+    badge = "💪";
+  }else{
+    title = "Keep going, " + userName + "!";
+    message =
+      "One quiz doesn't define you. Learn from it, try another one, and keep moving forward!";
+    badge = "🧠";
+  }
+
+  document.getElementById("resultTitle").textContent = title;
+  document.getElementById("resultMessage").textContent = message;
+  document.getElementById("resultBadge").textContent = badge;
+
+  showScreen(resultScreen);
+}
+
+/* =========================
+   RESULT BUTTONS
+   ========================= */
+
+document.getElementById("anotherBtn").addEventListener("click",()=>{
+  showScreen(homeScreen);
+});
+
+document.getElementById("homeBtn").addEventListener("click",()=>{
+  showScreen(homeScreen);
+});
+
+document.getElementById("backBtn").addEventListener("click",()=>{
+  if(quizScreen.classList.contains("active")){
+    openLeaveModal();
+    return;
+  }
+  window.location.href = "index.html";
+});
+
+const leaveModal = document.getElementById("leaveModal");
+function openLeaveModal(){ leaveModal.classList.add("open"); }
+function closeLeaveModal(){ leaveModal.classList.remove("open"); }
+document.getElementById("stayBtn").addEventListener("click", closeLeaveModal);
+document.getElementById("leaveQuizBtn").addEventListener("click",()=>{
+  clearInterval(timerInterval);
+  window.location.href = "index.html";
+});
+document.addEventListener("backbutton",()=>{
+  if(leaveModal.classList.contains("open")){ closeLeaveModal(); return; }
+  if(quizScreen.classList.contains("active")){ openLeaveModal(); return; }
+  window.location.href = "index.html";
+});
+
+/* =========================
+   HELPERS
+   ========================= */
+
+function formatTime(seconds){
+  const minutes = Math.floor(seconds/60);
+  const secs = String(seconds%60).padStart(2,"0");
+  return minutes + ":" + secs;
+}
+
+function escapeHtml(text){
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+let toastTimeout;
+
+function showToast(message){
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(()=>{
+    toast.classList.remove("show");
+  },2200);
+}
+
+/* Keep progress saved when the page is left. */
+window.addEventListener("beforeunload",()=>{
+  clearInterval(timerInterval);
+  saveProgress();
+});
+
+</script>
+</body>
+</html>

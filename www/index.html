@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OSIZWENI Announcements</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0B1B3A;
+  --navy-card:#132852;
+  --navy-line:#24406e;
+  --maroon:#8C1D2B;
+  --maroon-deep:#5E121C;
+  --yellow:#FFC93C;
+  --yellow-deep:#E8AC1D;
+  --cream:#FDF3E2;
+  --muted:#93A3C4;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%,#142c58 0%,transparent 45%),
+    radial-gradient(circle at 90% 15%,#14213f 0%,transparent 40%),
+    var(--navy);
+  color:var(--cream);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+  padding-bottom:105px;
+}
+
+/* ================= HEADER ================= */
+
+.header-row{
+  width:88%;
+  max-width:480px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px 0 10px;
+}
+
+.title-wrap{
+  text-align:center;
+}
+
+h1{
+  margin:0;
+  font-family:'Fredoka',sans-serif;
+  font-weight:700;
+  font-size:20px;
+  letter-spacing:.3px;
+  color:var(--cream);
+}
+
+h1 span{
+  color:var(--yellow);
+}
+
+/* ================= PROFILE ================= */
+
+.profile-area{
+  width:88%;
+  max-width:480px;
+  display:flex;
+  justify-content:center;
+  margin:8px 0 16px;
+}
+
+.avatar-wrap{
+  position:relative;
+  width:82px;
+  height:82px;
+}
+
+.avatar-img{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:var(--navy-card);
+  border:3px solid var(--yellow);
+  object-fit:cover;
+  display:block;
+  box-shadow:
+    0 7px 0 -2px var(--maroon),
+    0 12px 22px rgba(0,0,0,.35);
+}
+
+.avatar-shuffle{
+  position:absolute;
+  bottom:-3px;
+  right:-4px;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:var(--yellow);
+  border:3px solid var(--navy);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  cursor:pointer;
+  color:var(--navy);
+  box-shadow:0 3px 0 var(--yellow-deep);
+}
+
+/* ================= UPGRADE STRIP ================= */
+
+.upgrade-strip{
+  width:88%;
+  max-width:480px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  background:var(--maroon);
+  color:var(--cream);
+  font-family:'Fredoka',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  padding:8px 14px;
+  border-radius:14px;
+  margin:8px 0;
+}
+
+.upgrade-strip .close-strip{
+  cursor:pointer;
+  font-size:16px;
+  line-height:1;
+  opacity:.85;
+}
+
+.upgrade-strip.hidden{
+  display:none;
+}
+
+/* ================= QUIZ PROMO ================= */
+
+.quiz-promo{
+  width:88%;
+  max-width:480px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  background:
+    linear-gradient(
+      120deg,
+      var(--maroon) 0%,
+      var(--maroon-deep) 100%
+    );
+
+  border:2px dashed var(--yellow);
+  border-radius:18px;
+  padding:16px 18px;
+  margin:10px 0 18px;
+
+  text-decoration:none;
+  color:var(--cream);
+
+  box-shadow:
+    0 8px 0 -3px rgba(0,0,0,.3),
+    0 12px 18px rgba(0,0,0,.3);
+
+  transition:transform .2s ease;
+}
+
+.quiz-promo:active{
+  transform:scale(.98);
+}
+
+.quiz-promo-text{
+  flex:1;
+}
+
+.quiz-promo-title{
+  font-family:'Fredoka',sans-serif;
+  font-weight:700;
+  font-size:16px;
+  color:var(--yellow);
+  margin-bottom:2px;
+}
+
+.quiz-promo-sub{
+  font-size:12px;
+  color:var(--cream);
+  opacity:.9;
+}
+
+.quiz-promo-arrow{
+  font-family:'Fredoka',sans-serif;
+  font-size:20px;
+  background:var(--yellow);
+  color:var(--navy);
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+/* ================= FILTER ================= */
+
+.controls{
+  width:88%;
+  max-width:480px;
+  margin:0 0 20px;
+  display:flex;
+  justify-content:flex-start;
+}
+
+.filter-pill{
+  font-family:'Fredoka',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  color:var(--navy);
+  background:var(--yellow);
+  border:none;
+  padding:9px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  box-shadow:0 3px 0 var(--yellow-deep);
+  transition:transform .15s ease;
+}
+
+.filter-pill:active{
+  transform:translateY(2px);
+  box-shadow:0 1px 0 var(--yellow-deep);
+}
+
+.filter-pill.active-filter{
+  background:var(--maroon);
+  color:var(--cream);
+  box-shadow:0 3px 0 var(--maroon-deep);
+}
+
+/* ================= BOTTOM SHEET ================= */
+
+.sheet-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(6,12,28,.65);
+  z-index:1100;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.sheet-overlay.open{
+  display:flex;
+}
+
+.sheet{
+  width:100%;
+  max-width:480px;
+  background:var(--navy-card);
+  border-radius:24px 24px 0 0;
+  padding:14px 20px 28px;
+  border:2px solid var(--navy-line);
+  border-bottom:none;
+  animation:slideUp .28s ease;
+}
+
+@keyframes slideUp{
+  from{transform:translateY(100%);}
+  to{transform:translateY(0);}
+}
+
+.sheet-handle{
+  width:40px;
+  height:4px;
+  background:var(--navy-line);
+  border-radius:4px;
+  margin:0 auto 14px;
+}
+
+.sheet h3{
+  font-family:'Fredoka',sans-serif;
+  color:var(--yellow);
+  font-size:15px;
+  margin:0 0 14px;
+}
+
+.chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.chip{
+  font-family:'Fredoka',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  padding:10px 18px;
+  border-radius:18px;
+  border:2px solid var(--navy-line);
+  background:transparent;
+  color:var(--cream);
+  cursor:pointer;
+}
+
+.chip.selected{
+  background:var(--yellow);
+  color:var(--navy);
+  border-color:var(--yellow);
+}
+
+/* ================= ANNOUNCEMENTS ================= */
+
+.news-container{
+  width:88%;
+  max-width:480px;
+}
+
+.section-label{
+  font-family:'Fredoka',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--yellow);
+  margin:4px 0 12px;
+}
+
+.empty-state{
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  padding:30px 10px;
+}
+
+.announcement-card{
+  position:relative;
+  background:var(--navy-card);
+  padding:20px 18px 16px;
+  margin-bottom:26px;
+  border-radius:14px;
+  border:1.5px dashed var(--navy-line);
+
+  box-shadow:
+    0 10px 0 -4px rgba(0,0,0,.25),
+    0 14px 20px rgba(0,0,0,.3);
+
+  animation:pinDrop .5s cubic-bezier(.22,1.4,.4,1) both;
+}
+
+.announcement-card:nth-child(3n+1){
+  transform:rotate(-1.4deg);
+}
+
+.announcement-card:nth-child(3n+2){
+  transform:rotate(1.1deg);
+}
+
+.announcement-card:nth-child(3n+3){
+  transform:rotate(-.5deg);
+}
+
+.announcement-card:hover{
+  transform:rotate(0deg) translateY(-3px);
+}
+
+.announcement-card::before{
+  content:"";
+  position:absolute;
+  top:-9px;
+  left:50%;
+  transform:translateX(-50%);
+  width:16px;
+  height:16px;
+  background:var(--yellow);
+  border-radius:50%;
+  box-shadow:
+    0 3px 4px rgba(0,0,0,.4),
+    inset 0 -3px 3px rgba(0,0,0,.2);
+}
+
+.announcement-card.pinned::before{
+  background:var(--maroon);
+}
+
+.announcement-card.pinned{
+  border-color:var(--maroon);
+}
+
+.pinned-tag{
+  font-family:'Fredoka',sans-serif;
+  font-size:10px;
+  font-weight:600;
+  color:var(--maroon);
+  letter-spacing:.5px;
+  margin-bottom:6px;
+}
+
+.announcement-title{
+  font-family:'Fredoka',sans-serif;
+  font-weight:600;
+  font-size:18px;
+  color:var(--cream);
+  margin-bottom:8px;
+}
+
+.announcement-grade{
+  font-family:'Fredoka',sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.5px;
+  color:var(--navy);
+  background:var(--yellow);
+  padding:4px 12px;
+  border-radius:20px;
+  display:inline-block;
+  margin-bottom:12px;
+  transform:rotate(-2deg);
+}
+
+.announcement-grade.g-9{
+  background:var(--maroon);
+  color:var(--cream);
+}
+
+.announcement-grade.g-10{
+  background:#4E6FB0;
+  color:var(--cream);
+}
+
+.announcement-grade.g-11{
+  background:var(--yellow-deep);
+  color:var(--navy);
+}
+
+.announcement-grade.g-12{
+  background:var(--maroon-deep);
+  color:var(--cream);
+}
+
+.announcement-grade.g-all{
+  background:linear-gradient(90deg,var(--maroon),var(--yellow));
+  color:var(--navy);
+}
+
+.announcement-card .msg{
+  font-size:14px;
+  line-height:1.55;
+  color:var(--cream);
+  opacity:.92;
+}
+
+.read-more{
+  color:var(--yellow);
+  cursor:pointer;
+  font-weight:600;
+  font-family:'Fredoka',sans-serif;
+  font-size:12.5px;
+  margin-left:4px;
+}
+
+.read-more:hover{
+  text-decoration:underline;
+}
+
+.announcement-date{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:12px;
+}
+
+@keyframes pinDrop{
+  0%{
+    opacity:0;
+    transform:translateY(-18px) scale(.96);
+  }
+
+  100%{
+    opacity:1;
+  }
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+  position:fixed;
+  bottom:14px;
+  left:50%;
+  transform:translateX(-50%);
+
+  width:82%;
+  max-width:340px;
+
+  background:var(--navy-card);
+  border:2px solid var(--navy-line);
+  border-radius:24px;
+
+  display:flex;
+  justify-content:space-around;
+
+  padding:9px 8px;
+
+  box-shadow:0 10px 24px rgba(0,0,0,.45);
+
+  z-index:999;
+}
+
+.bottom-nav button{
+  background:none;
+  border:none;
+
+  color:var(--muted);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  gap:4px;
+
+  cursor:pointer;
+
+  padding:7px 24px;
+
+  border-radius:16px;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease;
+
+  font-family:'Poppins',sans-serif;
+}
+
+.bottom-nav button .icon{
+  width:22px;
+  height:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.bottom-nav button svg{
+  width:21px;
+  height:21px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.bottom-nav button span{
+  font-size:10.5px;
+  font-weight:600;
+}
+
+.bottom-nav button:hover{
+  transform:translateY(-2px);
+}
+
+.bottom-nav button.active{
+  color:var(--navy);
+  background:var(--yellow);
+  box-shadow:0 4px 0 var(--yellow-deep);
+}
+
+/* ================= MODAL ================= */
+
+#readMoreModal{
+  display:none;
+  position:fixed;
+  z-index:1200;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(6,12,28,.72);
+  backdrop-filter:blur(2px);
+}
+
+#readMoreModal .modal-box{
+  background:var(--navy-card);
+  width:88%;
+  max-width:400px;
+  margin:110px auto;
+  padding:24px 22px;
+
+  border-radius:20px;
+  text-align:left;
+
+  position:relative;
+
+  border:2px dashed var(--navy-line);
+
+  box-shadow:0 16px 40px rgba(0,0,0,.5);
+
+  animation:pinDrop .35s ease both;
+}
+
+#closeReadMore{
+  position:absolute;
+  top:12px;
+  right:16px;
+  cursor:pointer;
+  font-weight:700;
+  color:var(--yellow);
+  font-size:22px;
+  line-height:1;
+}
+
+#readMoreTitle{
+  font-family:'Fredoka',sans-serif;
+  color:var(--yellow);
+  margin:0 0 12px;
+  font-size:19px;
+  padding-right:20px;
+}
+
+#readMoreMessage{
+  color:var(--cream);
+  font-size:14px;
+  line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<div class="header-row">
+  <div class="title-wrap">
+    <h1>OSIZWENI <span>Secondary</span></h1>
+  </div>
+</div>
+
+<!-- ================= BIG PROFILE ================= -->
+
+<div class="profile-area">
+  <div class="avatar-wrap">
+
+    <img
+      id="avatarImg"
+      class="avatar-img"
+      alt="Your avatar"
+    >
+
+    <div
+      class="avatar-shuffle"
+      id="avatarShuffle"
+      title="Change avatar"
+    >
+      ⟳
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= UPGRADE ================= -->
+
+<div class="upgrade-strip" id="upgradeStrip">
+  <span>🚀 Big upgrade pinned for later</span>
+  <span class="close-strip" id="closeStrip">&times;</span>
+</div>
+
+<!-- ================= QUIZ ================= -->
+
+<a href="quiz.html" class="quiz-promo">
+
+  <div class="quiz-promo-text">
+
+    <div class="quiz-promo-title">
+      🎮 Quiz Zone
+    </div>
+
+    <div class="quiz-promo-sub">
+      Play solo or battle your friends
+    </div>
+
+  </div>
+
+  <div class="quiz-promo-arrow">
+    →
+  </div>
+
+</a>
+
+<!-- ================= FILTER ================= -->
+
+<div class="controls">
+
+  <button
+    class="filter-pill"
+    id="filterTrigger"
+  >
+    🎓 <span id="filterLabel">All Grades</span> ▾
+  </button>
+
+</div>
+
+<!-- ================= NEWS ================= -->
+
+<div id="news" class="news-container"></div>
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<div class="bottom-nav">
+
+  <button
+    onclick="window.location.href='index.html'"
+    class="active"
+  >
+
+    <div class="icon">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M3 10.5L12 3l9 7.5"></path>
+        <path d="M5 9.5V21h14V9.5"></path>
+        <path d="M9 21v-7h6v7"></path>
+      </svg>
+
+    </div>
+
+    <span>Home</span>
+
+  </button>
+
+
+  <button
+    onclick="window.location.href='profile.html'"
+  >
+
+    <div class="icon">
+
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7"></path>
+      </svg>
+
+    </div>
+
+    <span>Profile</span>
+
+  </button>
+
+</div>
+
+<!-- ================= FILTER SHEET ================= -->
+
+<div class="sheet-overlay" id="filterSheet">
+
+  <div class="sheet">
+
+    <div class="sheet-handle"></div>
+
+    <h3>Filter by grade</h3>
+
+    <div class="chip-row" id="chipRow">
+
+      <button
+        class="chip selected"
+        data-grade="All"
+      >
+        All
+      </button>
+
+      <button class="chip" data-grade="8">
+        Grade 8
+      </button>
+
+      <button class="chip" data-grade="9">
+        Grade 9
+      </button>
+
+      <button class="chip" data-grade="10">
+        Grade 10
+      </button>
+
+      <button class="chip" data-grade="11">
+        Grade 11
+      </button>
+
+      <button class="chip" data-grade="12">
+        Grade 12
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= READ MORE MODAL ================= -->
+
+<div id="readMoreModal">
+
+  <div class="modal-box">
+
+    <span id="closeReadMore">
+      &times;
+    </span>
+
+    <h2 id="readMoreTitle"></h2>
+
+    <div id="readMoreMessage"></div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= FIREBASE ================= -->
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyAa5E1EbFA7ljnoX5WmKpLcUXeNhFzYD54",
+
+  authDomain:
+    "schoolannouncements-5f68b.firebaseapp.com",
+
+  databaseURL:
+    "https://schoolannouncements-5f68b-default-rtdb.firebaseio.com",
+
+  projectId:
+    "schoolannouncements-5f68b"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+const newsDiv =
+  document.getElementById("news");
+
+let currentGrade = "All";
+
+
+/* ================= UPGRADE STRIP ================= */
+
+const upgradeStrip =
+  document.getElementById("upgradeStrip");
+
+if(
+  localStorage.getItem(
+    "upgrade_strip_dismissed"
+  ) === "1"
+){
+
+  upgradeStrip.classList.add("hidden");
+
+}
+
+document.getElementById(
+  "closeStrip"
+).onclick = () => {
+
+  upgradeStrip.classList.add("hidden");
+
+  localStorage.setItem(
+    "upgrade_strip_dismissed",
+    "1"
+  );
+
+};
+
+
+/* ================= AVATAR ================= */
+
+const AVATAR_KEY =
+  "oss_avatar_svg";
+
+const SEED_KEY =
+  "oss_avatar_seed";
+
+const avatarImg =
+  document.getElementById("avatarImg");
+
+
+function randomSeed(){
+
+  return (
+    "student-" +
+    Math.random()
+      .toString(36)
+      .slice(2,10)
+  );
+
+}
+
+
+async function loadAvatar(forceNew){
+
+  let seed =
+    localStorage.getItem(SEED_KEY);
+
+
+  if(!seed || forceNew){
+
+    seed = randomSeed();
+
+    localStorage.setItem(
+      SEED_KEY,
+      seed
+    );
+
+    localStorage.removeItem(
+      AVATAR_KEY
+    );
+
+  }
+
+
+  const cached =
+    localStorage.getItem(AVATAR_KEY);
+
+
+  if(cached && !forceNew){
+
+    avatarImg.src = cached;
+
+    return;
+
+  }
+
+
+  try{
+
+    const res =
+      await fetch(
+        `https://api.dicebear.com/9.x/adventurer/svg?seed=${seed}`
+      );
+
+    const svgText =
+      await res.text();
+
+
+    const dataUrl =
+      "data:image/svg+xml;base64," +
+      btoa(
+        unescape(
+          encodeURIComponent(svgText)
+        )
+      );
+
+
+    localStorage.setItem(
+      AVATAR_KEY,
+      dataUrl
+    );
+
+
+    avatarImg.src =
+      dataUrl;
+
+  }
+
+  catch(e){
+
+    if(cached){
+
+      avatarImg.src =
+        cached;
+
+    }
+
+  }
+
+}
+
+
+document.getElementById(
+  "avatarShuffle"
+).onclick = () =>
+  loadAvatar(true);
+
+
+loadAvatar(false);
+
+
+/* ================= FILTER ================= */
+
+const filterTrigger =
+  document.getElementById(
+    "filterTrigger"
+  );
+
+const filterSheet =
+  document.getElementById(
+    "filterSheet"
+  );
+
+const filterLabel =
+  document.getElementById(
+    "filterLabel"
+  );
+
+const chipRow =
+  document.getElementById(
+    "chipRow"
+  );
+
+
+filterTrigger.onclick = () =>
+  filterSheet.classList.add("open");
+
+
+filterSheet.onclick = (e) => {
+
+  if(e.target === filterSheet){
+
+    filterSheet.classList.remove(
+      "open"
+    );
+
+  }
+
+};
+
+
+chipRow
+  .querySelectorAll(".chip")
+  .forEach(chip => {
+
+    chip.onclick = () => {
+
+      chipRow
+        .querySelectorAll(".chip")
+        .forEach(c =>
+          c.classList.remove(
+            "selected"
+          )
+        );
+
+
+      chip.classList.add(
+        "selected"
+      );
+
+
+      currentGrade =
+        chip.dataset.grade;
+
+
+      filterLabel.textContent =
+        currentGrade === "All"
+          ? "All Grades"
+          : "Grade " + currentGrade;
+
+
+      filterTrigger.classList.toggle(
+        "active-filter",
+        currentGrade !== "All"
+      );
+
+
+      filterSheet.classList.remove(
+        "open"
+      );
+
+
+      renderAnnouncements(
+        loadFromLocal()
+      );
+
+    };
+
+  });
+
+
+/* ================= LOCAL DATA ================= */
+
+function loadFromLocal(){
+
+  const stored =
+    localStorage.getItem(
+      "announcements_backup"
+    );
+
+  if(!stored)
+    return [];
+
+  try{
+
+    return JSON.parse(stored);
+
+  }
+
+  catch{
+
+    return [];
+
+  }
+
+}
+
+
+function saveToLocal(data){
+
+  localStorage.setItem(
+    "announcements_backup",
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* ================= GRADE ================= */
+
+function gradeClass(grade){
+
+  const g =
+    String(grade).trim();
+
+
+  if(g === "All")
+    return "g-all";
+
+
+  if(
+    ["9","10","11","12"]
+      .includes(g)
+  ){
+
+    return "g-" + g;
+
+  }
+
+
+  return "";
+
+}
+
+
+/* ================= CARD ================= */
+
+function buildCard(a,isPinned){
+
+  const card =
+    document.createElement("div");
+
+
+  card.className =
+    "announcement-card" +
+    (isPinned ? " pinned" : "");
+
+
+  if(isPinned){
+
+    const tag =
+      document.createElement("div");
+
+    tag.className =
+      "pinned-tag";
+
+    tag.textContent =
+      "📌 PINNED";
+
+    card.appendChild(tag);
+
+  }
+
+
+  const title =
+    document.createElement("div");
+
+  title.className =
+    "announcement-title";
+
+  title.textContent =
+    a.title;
+
+
+  const grade =
+    document.createElement("div");
+
+  grade.className =
+    "announcement-grade " +
+    gradeClass(a.grade);
+
+  grade.textContent =
+    a.grade;
+
+
+  const message =
+    document.createElement("div");
+
+  message.className =
+    "msg";
+
+
+  const shortMsg =
+    a.message.length > 120
+      ? a.message.substring(0,120) + "..."
+      : a.message;
+
+
+  message.textContent =
+    shortMsg;
+
+
+  if(a.message.length > 120){
+
+    const readMore =
+      document.createElement("span");
+
+    readMore.className =
+      "read-more";
+
+    readMore.textContent =
+      " Read more";
+
+
+    readMore.onclick = () => {
+
+      document.getElementById(
+        "readMoreTitle"
+      ).textContent =
+        a.title;
+
+
+      document.getElementById(
+        "readMoreMessage"
+      ).textContent =
+        a.message;
+
+
+      document.getElementById(
+        "readMoreModal"
+      ).style.display =
+        "block";
+
+    };
+
+
+    message.appendChild(
+      readMore
+    );
+
+  }
+
+
+  const date =
+    document.createElement("div");
+
+  date.className =
+    "announcement-date";
+
+  date.textContent =
+    new Date(a.date)
+      .toLocaleString();
+
+
+  card.append(
+    title,
+    grade,
+    message,
+    date
+  );
+
+
+  return card;
+
+}
+
+
+/* ================= MODAL ================= */
+
+const readMoreModal =
+  document.getElementById(
+    "readMoreModal"
+  );
+
+
+document.getElementById(
+  "closeReadMore"
+).onclick = () => {
+
+  readMoreModal.style.display =
+    "none";
+
+};
+
+
+window.addEventListener(
+  "click",
+  (e) => {
+
+    if(e.target === readMoreModal){
+
+      readMoreModal.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/* ================= RENDER ================= */
+
+function renderAnnouncements(list){
+
+  newsDiv.innerHTML = "";
+
+
+  const matches = a =>
+    currentGrade === "All" ||
+    a.grade === "All" ||
+    a.grade === currentGrade;
+
+
+  const pinned =
+    list.filter(
+      a => a.urgent && matches(a)
+    );
+
+
+  const regular =
+    list.filter(
+      a => !a.urgent && matches(a)
+    );
+
+
+  if(
+    pinned.length === 0 &&
+    regular.length === 0
+  ){
+
+    newsDiv.innerHTML =
+      '<div class="empty-state">' +
+      '📌 Nothing pinned here yet — check back soon.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  if(pinned.length){
+
+    const label =
+      document.createElement("div");
+
+    label.className =
+      "section-label";
+
+    label.textContent =
+      "Pinned";
+
+    newsDiv.appendChild(label);
+
+
+    pinned.forEach(a =>
+
+      newsDiv.appendChild(
+        buildCard(a,true)
+      )
+
+    );
+
+  }
+
+
+  if(regular.length){
+
+    if(pinned.length){
+
+      const label =
+        document.createElement("div");
+
+      label.className =
+        "section-label";
+
+      label.textContent =
+        "All announcements";
+
+      newsDiv.appendChild(label);
+
+    }
+
+
+    regular.forEach(a =>
+
+      newsDiv.appendChild(
+        buildCard(a,false)
+      )
+
+    );
+
+  }
+
+}
+
+
+/* ================= FIREBASE ================= */
+
+function loadAnnouncements(){
+
+  const localData =
+    loadFromLocal();
+
+
+  if(localData.length > 0){
+
+    renderAnnouncements(
+      localData
+    );
+
+  }
+
+
+  onValue(
+    ref(db,"announcements"),
+    snapshot => {
+
+      const data =
+        snapshot.val();
+
+
+      if(!data){
+
+        newsDiv.innerHTML =
+          '<div class="empty-state">' +
+          '📌 Nothing pinned here yet — check back soon.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      const list =
+        Object.values(data)
+          .sort(
+            (a,b) =>
+              b.date - a.date
+          );
+
+
+      saveToLocal(list);
+
+      renderAnnouncements(
+        list
+      );
+
+    }
+  );
+
+}
+
+
+loadAnnouncements();
+
+</script>
+
+</body>
+</html>

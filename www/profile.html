@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --navy:#0B1B3A;
+  --navy-card:#132852;
+  --navy-line:#24406e;
+
+  --maroon:#8C1D2B;
+  --maroon-deep:#5E121C;
+
+  --yellow:#FFC93C;
+  --yellow-deep:#E8AC1D;
+
+  --cream:#FDF3E2;
+  --muted:#93A3C4;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+
+  margin:0;
+
+  font-family:'Poppins',sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      #142c58 0%,
+      transparent 45%
+    ),
+
+    radial-gradient(
+      circle at 90% 15%,
+      #14213f 0%,
+      transparent 40%
+    ),
+
+    var(--navy);
+
+  color:var(--cream);
+
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  padding-bottom:110px;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.header{
+
+  width:88%;
+  max-width:480px;
+
+  padding:22px 0 12px;
+
+  text-align:center;
+}
+
+.header h1{
+
+  margin:0;
+
+  font-family:'Fredoka',sans-serif;
+
+  font-size:22px;
+
+  font-weight:700;
+
+  color:var(--cream);
+}
+
+.header h1 span{
+
+  color:var(--yellow);
+}
+
+
+/* =====================================
+   PROFILE CARD
+===================================== */
+
+.profile-card{
+
+  width:88%;
+  max-width:480px;
+
+  background:var(--navy-card);
+
+  border:2px dashed var(--navy-line);
+
+  border-radius:24px;
+
+  padding:28px 20px 25px;
+
+  text-align:center;
+
+  box-shadow:
+    0 10px 0 -4px rgba(0,0,0,.25),
+    0 16px 28px rgba(0,0,0,.3);
+}
+
+
+/* =====================================
+   AVATAR
+===================================== */
+
+.avatar-wrap{
+
+  position:relative;
+
+  width:110px;
+  height:110px;
+
+  margin:0 auto 15px;
+}
+
+.avatar{
+
+  width:110px;
+  height:110px;
+
+  border-radius:50%;
+
+  object-fit:cover;
+
+  background:var(--navy);
+
+  border:4px solid var(--yellow);
+
+  box-shadow:
+    0 7px 0 -2px var(--maroon),
+    0 12px 22px rgba(0,0,0,.35);
+}
+
+.shuffle{
+
+  position:absolute;
+
+  right:-5px;
+  bottom:0;
+
+  width:33px;
+  height:33px;
+
+  border-radius:50%;
+
+  border:3px solid var(--navy);
+
+  background:var(--yellow);
+
+  color:var(--navy);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  font-size:16px;
+
+  box-shadow:
+    0 3px 0 var(--yellow-deep);
+
+  transition:.15s;
+}
+
+.shuffle:active{
+
+  transform:translateY(2px);
+
+  box-shadow:none;
+}
+
+
+/* =====================================
+   USER NAME
+===================================== */
+
+.student-name{
+
+  font-family:'Fredoka',sans-serif;
+
+  font-size:25px;
+
+  font-weight:700;
+
+  color:var(--cream);
+
+  margin-top:4px;
+}
+
+.student-tag{
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  margin-top:3px;
+}
+
+
+/* =====================================
+   PERSONAL MESSAGE
+===================================== */
+
+.message-card{
+
+  width:88%;
+  max-width:480px;
+
+  margin-top:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--maroon),
+      var(--maroon-deep)
+    );
+
+  border:2px solid var(--yellow);
+
+  border-radius:20px;
+
+  padding:20px 18px;
+
+  position:relative;
+
+  box-shadow:
+    0 8px 0 -3px rgba(0,0,0,.3),
+    0 12px 20px rgba(0,0,0,.3);
+}
+
+.message-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  bottom:-9px;
+  left:30px;
+
+  width:18px;
+  height:18px;
+
+  background:var(--maroon-deep);
+
+  transform:rotate(45deg);
+
+  border-right:2px solid var(--yellow);
+  border-bottom:2px solid var(--yellow);
+}
+
+.message-title{
+
+  font-family:'Fredoka',sans-serif;
+
+  color:var(--yellow);
+
+  font-size:16px;
+
+  margin-bottom:7px;
+}
+
+.message-text{
+
+  font-size:13px;
+
+  line-height:1.6;
+
+  color:var(--cream);
+}
+
+
+/* =====================================
+   CHANGE NAME
+===================================== */
+
+.change-name{
+
+  width:88%;
+  max-width:480px;
+
+  margin-top:25px;
+
+  display:flex;
+
+  justify-content:center;
+}
+
+.change-name button{
+
+  border:none;
+
+  background:transparent;
+
+  color:var(--yellow);
+
+  font-family:'Fredoka',sans-serif;
+
+  font-size:13px;
+
+  cursor:pointer;
+
+  padding:7px 12px;
+
+  border-radius:12px;
+}
+
+.change-name button:active{
+
+  background:rgba(255,201,60,.1);
+}
+
+
+/* =====================================
+   ABOUT APP
+===================================== */
+
+.about-section{
+
+  width:88%;
+  max-width:480px;
+
+  margin-top:20px;
+}
+
+.section-title{
+
+  font-family:'Fredoka',sans-serif;
+
+  font-size:16px;
+
+  color:var(--yellow);
+
+  margin-bottom:10px;
+}
+
+.about-card{
+
+  background:var(--navy-card);
+
+  border:1.5px dashed var(--navy-line);
+
+  border-radius:18px;
+
+  padding:17px;
+}
+
+.about-text{
+
+  font-size:12px;
+
+  line-height:1.65;
+
+  color:var(--cream);
+
+  opacity:.9;
+}
+
+.company{
+
+  margin-top:12px;
+
+  font-family:'Fredoka',sans-serif;
+
+  font-size:14px;
+
+  color:var(--yellow);
+}
+
+
+/* =====================================
+   LINKS
+===================================== */
+
+.links-section{
+
+  width:88%;
+  max-width:480px;
+
+  margin-top:20px;
+}
+
+.link-card{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  text-decoration:none;
+
+  color:var(--cream);
+
+  background:var(--navy-card);
+
+  border:1.5px dashed var(--navy-line);
+
+  border-radius:16px;
+
+  padding:14px;
+
+  margin-bottom:9px;
+
+  transition:.18s;
+}
+
+.link-card:active{
+
+  transform:scale(.98);
+}
+
+.link-left{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+}
+
+.link-icon{
+
+  width:40px;
+  height:40px;
+
+  border-radius:12px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:var(--maroon);
+
+  font-size:18px;
+}
+
+.link-name{
+
+  font-family:'Fredoka',sans-serif;
+
+  font-size:13px;
+}
+
+.link-sub{
+
+  font-size:10px;
+
+  color:var(--muted);
+
+  margin-top:2px;
+}
+
+.link-arrow{
+
+  color:var(--muted);
+
+  font-size:18px;
+}
+
+
+/* =====================================
+   BOTTOM NAV
+===================================== */
+
+.bottom-nav{
+
+  position:fixed;
+
+  bottom:14px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:82%;
+  max-width:340px;
+
+  background:var(--navy-card);
+
+  border:2px solid var(--navy-line);
+
+  border-radius:24px;
+
+  display:flex;
+
+  justify-content:space-around;
+
+  padding:9px 8px;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.45);
+
+  z-index:999;
+}
+
+.bottom-nav button{
+
+  background:none;
+
+  border:none;
+
+  color:var(--muted);
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  gap:4px;
+
+  cursor:pointer;
+
+  padding:7px 24px;
+
+  border-radius:16px;
+
+  font-family:'Poppins',sans-serif;
+
+  transition:.2s;
+}
+
+.bottom-nav button.active{
+
+  color:var(--navy);
+
+  background:var(--yellow);
+
+  box-shadow:
+    0 4px 0 var(--yellow-deep);
+}
+
+.icon{
+
+  width:22px;
+  height:22px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+}
+
+.icon svg{
+
+  width:21px;
+  height:21px;
+
+  stroke:currentColor;
+
+  fill:none;
+
+  stroke-width:2;
+
+  stroke-linecap:round;
+
+  stroke-linejoin:round;
+}
+
+.bottom-nav span{
+
+  font-size:10.5px;
+
+  font-weight:600;
+}
+
+
+/* =====================================
+   NAME POPUP
+===================================== */
+
+.name-overlay{
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(6,12,28,.78);
+
+  backdrop-filter:blur(5px);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:2000;
+
+  padding:20px;
+}
+
+.name-overlay.open{
+
+  display:flex;
+}
+
+.name-box{
+
+  width:100%;
+  max-width:390px;
+
+  background:var(--navy-card);
+
+  border:2px dashed var(--yellow);
+
+  border-radius:25px;
+
+  padding:28px 22px;
+
+  text-align:center;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.5);
+
+  animation:pop .3s ease;
+}
+
+@keyframes pop{
+
+  from{
+    opacity:0;
+    transform:scale(.88) translateY(15px);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+.name-emoji{
+
+  font-size:45px;
+
+  margin-bottom:8px;
+}
+
+.name-box h2{
+
+  margin:0;
+
+  font-family:'Fredoka',sans-serif;
+
+  font-size:22px;
+
+  color:var(--yellow);
+}
+
+.name-box p{
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  line-height:1.5;
+
+  margin:8px 5px 18px;
+}
+
+.name-input{
+
+  width:100%;
+
+  border:2px solid var(--navy-line);
+
+  background:var(--navy);
+
+  color:var(--cream);
+
+  border-radius:15px;
+
+  padding:13px 15px;
+
+  outline:none;
+
+  font-family:'Poppins',sans-serif;
+
+  font-size:14px;
+
+  text-align:center;
+}
+
+.name-input:focus{
+
+  border-color:var(--yellow);
+}
+
+.name-button{
+
+  width:100%;
+
+  border:none;
+
+  margin-top:12px;
+
+  padding:13px;
+
+  border-radius:15px;
+
+  background:var(--yellow);
+
+  color:var(--navy);
+
+  font-family:'Fredoka',sans-serif;
+
+  font-weight:700;
+
+  font-size:15px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 4px 0 var(--yellow-deep);
+}
+
+.name-button:active{
+
+  transform:translateY(3px);
+
+  box-shadow:none;
+}
+
+.name-error{
+
+  display:none;
+
+  color:#ff8f8f;
+
+  font-size:11px;
+
+  margin-top:8px;
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:360px){
+
+  .avatar,
+  .avatar-wrap{
+
+    width:95px;
+    height:95px;
+  }
+
+  .student-name{
+
+    font-size:22px;
+  }
+
+  .bottom-nav{
+
+    width:90%;
+  }
+
+  .bottom-nav button{
+
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<div class="header">
+
+  <h1>
+    Your <span>Profile</span>
+  </h1>
+
+</div>
+
+
+<!-- =====================================
+     PROFILE
+===================================== -->
+
+<div class="profile-card">
+
+  <div class="avatar-wrap">
+
+    <img
+      id="avatar"
+      class="avatar"
+      alt="Your avatar"
+    >
+
+    <button
+      id="shuffle"
+      class="shuffle"
+      title="Change avatar"
+    >
+      ⟳
+    </button>
+
+  </div>
+
+
+  <div
+    id="studentName"
+    class="student-name"
+  >
+    Student
+  </div>
+
+
+  <div class="student-tag">
+    OSIZWENI Secondary
+  </div>
+
+</div>
+
+
+<!-- =====================================
+     PERSONAL MESSAGE
+===================================== -->
+
+<div class="message-card">
+
+  <div class="message-title">
+    🌟 Hey, <span id="messageName">Student</span>!
+  </div>
+
+  <div
+    id="messageText"
+    class="message-text"
+  >
+    Ready to see what's happening?
+    Stay curious, keep learning, and
+    don't forget to enjoy the journey.
+  </div>
+
+</div>
+
+
+<!-- =====================================
+     CHANGE NAME
+===================================== -->
+
+<div class="change-name">
+
+  <button id="changeName">
+    ✏️ That's not my name
+  </button>
+
+</div>
+
+
+<!-- =====================================
+     ABOUT
+===================================== -->
+
+<div class="about-section">
+
+  <div class="section-title">
+    💡 About the app
+  </div>
+
+  <div class="about-card">
+
+    <div class="about-text">
+
+      Your little school companion for
+      announcements, quizzes and useful
+      student features — all wrapped in
+      a playful experience.
+
+    </div>
+
+
+    <div class="company">
+      Made with ❤️ by Spailã  Soft
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================
+     LINKS
+===================================== -->
+
+<div class="links-section">
+
+  <div class="section-title">
+    🔗 Find us
+  </div>
+
+
+  <!-- REPLACE THE # WITH YOUR REAL WEBSITE -->
+
+  <a
+    href="https://spailasoft7.github.io/Spail--official/"
+    class="link-card"
+    target="_blank"
+  >
+
+    <div class="link-left">
+
+      <div class="link-icon">
+        🌐
+      </div>
+
+      <div>
+
+        <div class="link-name">
+          Official Website
+        </div>
+
+        <div class="link-sub">
+          Visit our website
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="link-arrow">
+      →
+    </div>
+
+  </a>
+
+
+  <!-- REPLACE THE # WITH YOUR PLAY STORE PROFILE -->
+
+  <a
+    href="https://play.google.com/store/apps/dev?id=9179380982426217238"
+    class="link-card"
+    target="_blank"
+  >
+
+    <div class="link-left">
+
+      <div class="link-icon">
+        ▶
+      </div>
+
+      <div>
+
+        <div class="link-name">
+          Google Play
+        </div>
+
+        <div class="link-sub">
+          Our apps on Google Play
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="link-arrow">
+      →
+    </div>
+
+  </a>
+
+
+  <!-- REPLACE THE # WITH YOUR YOUTUBE -->
+
+  <a
+    href="https://youtube.com/@spaila7?si=v4AKddCHRdcO1YaZ"
+    class="link-card"
+    target="_blank"
+  >
+
+    <div class="link-left">
+
+      <div class="link-icon">
+        ▶
+      </div>
+
+      <div>
+
+        <div class="link-name">
+          YouTube
+        </div>
+
+        <div class="link-sub">
+          Watch what we're building
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="link-arrow">
+      →
+    </div>
+
+  </a>
+
+
+  <!-- REPLACE THE # WITH YOUR WHATSAPP CHANNEL -->
+
+  <a
+    href="https://whatsapp.com/channel/0029Vb77X8xHAdNb7AGUmD0O"
+    class="link-card"
+    target="_blank"
+  >
+
+    <div class="link-left">
+
+      <div class="link-icon">
+        💬
+      </div>
+
+      <div>
+
+        <div class="link-name">
+          WhatsApp Channel
+        </div>
+
+        <div class="link-sub">
+          Follow our updates
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="link-arrow">
+      →
+    </div>
+
+  </a>
+
+</div>
+
+
+<!-- =====================================
+     BOTTOM NAV
+===================================== -->
+
+<div class="bottom-nav">
+
+
+  <button
+    onclick="window.location.href='index.html'"
+  >
+
+    <div class="icon">
+
+      <svg viewBox="0 0 24 24">
+
+        <path d="M3 10.5L12 3l9 7.5"></path>
+
+        <path d="M5 9.5V21h14V9.5"></path>
+
+        <path d="M9 21v-7h6v7"></path>
+
+      </svg>
+
+    </div>
+
+    <span>
+      Home
+    </span>
+
+  </button>
+
+
+  <button class="active">
+
+    <div class="icon">
+
+      <svg viewBox="0 0 24 24">
+
+        <circle
+          cx="12"
+          cy="8"
+          r="4"
+        ></circle>
+
+        <path
+          d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7"
+        ></path>
+
+      </svg>
+
+    </div>
+
+    <span>
+      Profile
+    </span>
+
+  </button>
+
+</div>
+
+
+<!-- =====================================
+     FIRST-TIME NAME POPUP
+===================================== -->
+
+<div
+  id="nameOverlay"
+  class="name-overlay"
+>
+
+  <div class="name-box">
+
+    <div class="name-emoji">
+      👋
+    </div>
+
+
+    <h2>
+      Wait... who are you? 😄
+    </h2>
+
+
+    <p>
+      Before we start, the app needs
+      one very important piece of
+      information...
+      <br><br>
+      <strong>
+        What should I call you?
+      </strong>
+    </p>
+
+
+    <input
+      id="nameInput"
+      class="name-input"
+      type="text"
+      maxlength="30"
+      placeholder="Your name..."
+      autocomplete="off"
+    >
+
+
+    <div
+      id="nameError"
+      class="name-error"
+    >
+      Hmm... I need a name first 😅
+    </div>
+
+
+    <button
+      id="saveName"
+      class="name-button"
+    >
+      That's me! 🚀
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   NAME SYSTEM
+===================================== */
+
+const NAME_KEY =
+  "oss_student_name";
+
+
+const nameOverlay =
+  document.getElementById(
+    "nameOverlay"
+  );
+
+
+const nameInput =
+  document.getElementById(
+    "nameInput"
+  );
+
+
+const saveName =
+  document.getElementById(
+    "saveName"
+  );
+
+
+const nameError =
+  document.getElementById(
+    "nameError"
+  );
+
+
+const studentName =
+  document.getElementById(
+    "studentName"
+  );
+
+
+const messageName =
+  document.getElementById(
+    "messageName"
+  );
+
+
+const messageText =
+  document.getElementById(
+    "messageText"
+  );
+
+
+/* -------------------------------------
+   PERSONAL MESSAGES
+------------------------------------- */
+
+const messages = [
+
+  name =>
+    `Hey ${name}! 👋 Ready to see what's happening today?`,
+
+  name =>
+    `${name}, you've got this! 🚀 One announcement at a time.`,
+
+  name =>
+    `Good to see you, ${name}! 😎 Let's make today count.`,
+
+  name =>
+    `Yo ${name}! 👀 Anything new waiting for you?`,
+
+  name =>
+    `Welcome back, ${name}! 🌟 Stay curious and keep going.`,
+
+  name =>
+    `${name}, remember: small progress is still progress. 💪`
+
+];
+
+
+/* -------------------------------------
+   DISPLAY NAME
+------------------------------------- */
+
+function displayName(name){
+
+  studentName.textContent =
+    name;
+
+  messageName.textContent =
+    name;
+
+  const random =
+    Math.floor(
+      Math.random() *
+      messages.length
+    );
+
+  messageText.textContent =
+    messages[random](name);
+
+}
+
+
+/* -------------------------------------
+   SAVE NAME
+------------------------------------- */
+
+function saveStudentName(){
+
+  const name =
+    nameInput.value.trim();
+
+
+  if(!name){
+
+    nameError.style.display =
+      "block";
+
+    nameInput.focus();
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    NAME_KEY,
+    name
+  );
+
+
+  displayName(name);
+
+
+  nameOverlay.classList.remove(
+    "open"
+  );
+
+}
+
+
+/* -------------------------------------
+   FIRST VISIT
+------------------------------------- */
+
+const savedName =
+  localStorage.getItem(
+    NAME_KEY
+  );
+
+
+if(savedName){
+
+  displayName(savedName);
+
+}
+
+else{
+
+  nameOverlay.classList.add(
+    "open"
+  );
+
+  setTimeout(
+    () => nameInput.focus(),
+    350
+  );
+
+}
+
+
+/* -------------------------------------
+   SAVE BUTTON
+------------------------------------- */
+
+saveName.onclick =
+  saveStudentName;
+
+
+/* -------------------------------------
+   ENTER KEY
+------------------------------------- */
+
+nameInput.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Enter"){
+
+      saveStudentName();
+
+    }
+
+  }
+);
+
+
+/* -------------------------------------
+   CHANGE NAME
+------------------------------------- */
+
+document.getElementById(
+  "changeName"
+).onclick = () => {
+
+  nameInput.value =
+    localStorage.getItem(
+      NAME_KEY
+    ) || "";
+
+  nameError.style.display =
+    "none";
+
+  nameOverlay.classList.add(
+    "open"
+  );
+
+  setTimeout(
+    () => {
+
+      nameInput.focus();
+
+      nameInput.select();
+
+    },
+    250
+  );
+
+};
+
+
+/* =====================================
+   AVATAR
+===================================== */
+
+const AVATAR_KEY =
+  "oss_avatar_svg";
+
+const SEED_KEY =
+  "oss_avatar_seed";
+
+
+const avatar =
+  document.getElementById(
+    "avatar"
+  );
+
+
+const shuffle =
+  document.getElementById(
+    "shuffle"
+  );
+
+
+function randomSeed(){
+
+  return (
+    "student-" +
+    Math.random()
+      .toString(36)
+      .slice(2,10)
+  );
+
+}
+
+
+async function loadAvatar(
+  forceNew = false
+){
+
+  let seed =
+    localStorage.getItem(
+      SEED_KEY
+    );
+
+
+  if(!seed || forceNew){
+
+    seed =
+      randomSeed();
+
+
+    localStorage.setItem(
+      SEED_KEY,
+      seed
+    );
+
+
+    localStorage.removeItem(
+      AVATAR_KEY
+    );
+
+  }
+
+
+  const cached =
+    localStorage.getItem(
+      AVATAR_KEY
+    );
+
+
+  if(cached && !forceNew){
+
+    avatar.src =
+      cached;
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        `https://api.dicebear.com/9.x/adventurer/svg?seed=${seed}`
+      );
+
+
+    const svg =
+      await response.text();
+
+
+    const dataUrl =
+      "data:image/svg+xml;base64," +
+      btoa(
+        unescape(
+          encodeURIComponent(svg)
+        )
+      );
+
+
+    localStorage.setItem(
+      AVATAR_KEY,
+      dataUrl
+    );
+
+
+    avatar.src =
+      dataUrl;
+
+  }
+
+  catch(error){
+
+    if(cached){
+
+      avatar.src =
+        cached;
+
+    }
+
+  }
+
+}
+
+
+shuffle.onclick =
+  () => loadAvatar(true);
+
+
+loadAvatar();
+
+</script>
+
+
+</body>
+</html>
