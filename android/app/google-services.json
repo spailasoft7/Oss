@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "898569636999",
+    "firebase_url": "https://schoolannouncements-5f68b-default-rtdb.firebaseio.com",
+    "project_id": "schoolannouncements-5f68b",
+    "storage_bucket": "schoolannouncements-5f68b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898569636999:android:cf5f4e8bd139fb53463c22",
+        "android_client_info": {
+          "package_name": "com.spaila.oss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB13-hXqMluoJ3rubmR1Vdo7NEuKqnJeUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
