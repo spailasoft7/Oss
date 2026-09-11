@@ -129,7 +129,7 @@ function gradeClass(grade) {
 const imageModal = document.getElementById("imageModal");
 const imageModalImg = document.getElementById("imageModalImg");
 
-function openImageModal(src){
+function openImageModal(src) {
   imageModalImg.src = src;
   imageModal.classList.add("open");
 }
@@ -144,7 +144,6 @@ imageModal.onclick = (e) => {
   }
 };
 
-
 function buildCard(a, isPinned) {
   const card = document.createElement("div");
   card.className = "announcement-card" + (isPinned ? " pinned" : "");
@@ -156,16 +155,16 @@ function buildCard(a, isPinned) {
     card.appendChild(tag);
   }
 
-if (a.image) {
-  const img = document.createElement("img");
-  img.className = "announcement-image";
-  img.src = a.image;
-  img.alt = a.title || "";
-  img.loading = "lazy";
-  img.onerror = () => img.remove();
-  img.onclick = () => openImageModal(a.image);
-  card.appendChild(img);
-}
+  if (a.image) {
+    const img = document.createElement("img");
+    img.className = "announcement-image";
+    img.src = a.image;
+    img.alt = a.title || "";
+    img.loading = "lazy";
+    img.onerror = () => img.remove();
+    img.onclick = () => openImageModal(a.image);
+    card.appendChild(img);
+  }
 
   const title = document.createElement("div");
   title.className = "announcement-title";
@@ -187,22 +186,25 @@ if (a.image) {
     readMore.textContent = " Read more";
 
     readMore.onclick = () => {
-  document.getElementById("readMoreTitle").textContent = a.title;
-  document.getElementById("readMoreMessage").textContent = a.message;
+      document.getElementById("readMoreTitle").textContent = a.title;
+      document.getElementById("readMoreMessage").textContent = a.message;
 
-  const modalImg = document.getElementById("readMoreImage");
-  if (a.image) {
-    modalImg.src = a.image;
-    modalImg.style.display = "block";
-    modalImg.onerror = () => { modalImg.style.display = "none"; };
-    modalImg.onclick = () => openImageModal(a.image);
-  } else {
-    modalImg.style.display = "none";
-    modalImg.onclick = null;
+      const modalImg = document.getElementById("readMoreImage");
+      if (a.image) {
+        modalImg.src = a.image;
+        modalImg.style.display = "block";
+        modalImg.onerror = () => { modalImg.style.display = "none"; };
+        modalImg.onclick = () => openImageModal(a.image);
+      } else {
+        modalImg.style.display = "none";
+        modalImg.onclick = null;
+      }
+
+      document.getElementById("readMoreModal").style.display = "block";
+    };
+
+    message.appendChild(readMore);
   }
-
-  document.getElementById("readMoreModal").style.display = "block";
-};
 
   const date = document.createElement("div");
   date.className = "announcement-date";
