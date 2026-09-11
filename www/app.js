@@ -126,6 +126,25 @@ function gradeClass(grade) {
   return "";
 }
 
+const imageModal = document.getElementById("imageModal");
+const imageModalImg = document.getElementById("imageModalImg");
+
+function openImageModal(src){
+  imageModalImg.src = src;
+  imageModal.classList.add("open");
+}
+
+document.getElementById("closeImageModal").onclick = () => {
+  imageModal.classList.remove("open");
+};
+
+imageModal.onclick = (e) => {
+  if (e.target === imageModal) {
+    imageModal.classList.remove("open");
+  }
+};
+
+
 function buildCard(a, isPinned) {
   const card = document.createElement("div");
   card.className = "announcement-card" + (isPinned ? " pinned" : "");
@@ -136,6 +155,17 @@ function buildCard(a, isPinned) {
     tag.textContent = "📌 PINNED";
     card.appendChild(tag);
   }
+
+if (a.image) {
+  const img = document.createElement("img");
+  img.className = "announcement-image";
+  img.src = a.image;
+  img.alt = a.title || "";
+  img.loading = "lazy";
+  img.onerror = () => img.remove();
+  img.onclick = () => openImageModal(a.image);
+  card.appendChild(img);
+}
 
   const title = document.createElement("div");
   title.className = "announcement-title";
@@ -157,13 +187,22 @@ function buildCard(a, isPinned) {
     readMore.textContent = " Read more";
 
     readMore.onclick = () => {
-      document.getElementById("readMoreTitle").textContent = a.title;
-      document.getElementById("readMoreMessage").textContent = a.message;
-      document.getElementById("readMoreModal").style.display = "block";
-    };
+  document.getElementById("readMoreTitle").textContent = a.title;
+  document.getElementById("readMoreMessage").textContent = a.message;
 
-    message.appendChild(readMore);
+  const modalImg = document.getElementById("readMoreImage");
+  if (a.image) {
+    modalImg.src = a.image;
+    modalImg.style.display = "block";
+    modalImg.onerror = () => { modalImg.style.display = "none"; };
+    modalImg.onclick = () => openImageModal(a.image);
+  } else {
+    modalImg.style.display = "none";
+    modalImg.onclick = null;
   }
+
+  document.getElementById("readMoreModal").style.display = "block";
+};
 
   const date = document.createElement("div");
   date.className = "announcement-date";
