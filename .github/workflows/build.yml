@@ -35,12 +35,13 @@ jobs:
           cache: gradle
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+        with:
+          packages: "platform-tools"
 
       - name: Install Android SDK 36
         run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "platform-tools" "platforms;android-36"
+          sdkmanager "platforms;android-36"
 
       - name: Install JavaScript dependencies
         run: npm ci
@@ -61,7 +62,8 @@ jobs:
       - name: Verify generated APK
         run: |
           test -f android/app/build/outputs/apk/debug/app-debug.apk
-          ls -lh android/app/build/outputs/apk/debug/app-debug.apk
+          ls -lh app/build/outputs/apk/debug/app-debug.apk
+        working-directory: android
 
       - name: Upload APK as workflow artifact
         uses: actions/upload-artifact@v4
